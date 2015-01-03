@@ -1,0 +1,27 @@
+body {
+	background: url('../img/underconstruction.jpg');
+}
+
+#content {
+	/*make content fill the page*/
+}
+
+#corner {
+	/*center the text*/
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    /*set correct size*/
+    height: 10em;
+    width: 18em;
+    /*make gray-transparent*/
+    background-color: black;
+    opacity: .5;
+    /*font*/
+    font-size: 12px;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-style: oblique;
+    color: white;
+    /*hug the bottom-right corner:*/
+    float: bottom-right;
+}

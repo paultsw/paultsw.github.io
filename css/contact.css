@@ -1,15 +1,27 @@
 body {
-    /**/
+    /*set background wallpaper*/
+    background: url('../img/contact-bg/carina_nebula.jpg');
 }
 
-#background {
-    /*div container for bgImg (see below)*/
-}
-
-#bgImg {
-    /*fullscreen this background image*/
+#centered {
+	/*center the div inside this one*/
+    width: 100%;
 }
 
 #contact {
-    /*center this div*/
+    /*center the text*/
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    /*set correct size*/
+    height: 25em;
+    width: 50em;
+    /*make gray-transparent*/
+    background-color: black;
+    opacity: .7;
+    /*font*/
+    font-size: 20px;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-style: oblique;
+    color: white;
 }
