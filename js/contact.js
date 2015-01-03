@@ -6,12 +6,13 @@
 //new file to /img/contact-bg... figure out way to deal with
 //this issue later?
 files = [
-    "path1.jpg",
-    "path2.jpg",
-    "path3.jpg"
+    ["carina_nebula.jpg", "The Carina Nebula. Public domain via NASA/ESA."],
+    ["kelvin_helmholtz.jpg", "Kelvin-Helmholtz Billlows. CC-SA-3.0 by Lgostiau."],
+    ["baffin.jpg", "Baffin Island. CC-SA-2.5 by Ansgar Walk."]
 ];
 
 var rdm = Math.floor(Math.random() * filePaths.length);
 
 var randomImg = files[rdm];
-document.getElementById("bgImg").src = randomImg;
+document.getElementById("bgImg").src = "../img/contact-bg/"+randomImg[0];
+document.getElementById("bgImg").name = randomImg[1];
