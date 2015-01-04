@@ -7,7 +7,7 @@ body {
 }
 
 #corner {
-	/*center the text*/
+    /*center the text*/
     display: table-cell;
     text-align: center;
     vertical-align: middle;
@@ -23,5 +23,7 @@ body {
     font-style: oblique;
     color: white;
     /*hug the bottom-right corner:*/
-    float: bottom-right;
+    position: fixed;
+    bottom: 0;
+    right: 0;
 }
