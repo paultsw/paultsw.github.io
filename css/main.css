@@ -1,5 +1,6 @@
 body {
-	background: url('../img/underconstruction.jpg');
+	/*background: url('../img/underconstruction.jpg');*/
+    background-color: #f6e1ff;
 }
 
 #content {
@@ -9,11 +10,11 @@ body {
 #corner {
     /*center the text*/
     display: table-cell;
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
     /*set correct size*/
-    height: 10em;
-    width: 18em;
+    height: 8.5em;
+    width: 25em;
     /*make gray-transparent*/
     background-color: black;
     opacity: .5;

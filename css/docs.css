@@ -1,6 +1,6 @@
 body {
     /*set background wallpaper*/
-    background: url('../img/contact-bg/carina_nebula.jpg');
+    background: url('../img/contact-bg/baffin.jpg');
 }
 
 #centered {
@@ -12,7 +12,7 @@ body {
     transform: translate(-50%, -50%);
 }
 
-#contact {
+#documents {
     /*center the text*/
     display: table-cell;
     text-align: center;
