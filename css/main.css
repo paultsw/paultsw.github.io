@@ -1,6 +1,6 @@
 body {
-	background: url('../img/underconstruction.jpg');
-    /*background-color: #f6e1ff;*/
+	/*background: url('../img/underconstruction.jpg');*/
+    background-color: #000000;
 }
 
 #content {
@@ -16,13 +16,13 @@ body {
     height: 8.5em;
     width: 25em;
     /*make gray-transparent*/
-    background-color: black;
-    opacity: .5;
+    background-color: white;
+    opacity: .3;
     /*font*/
     font-size: 12px;
     font-family: "Lucida Console", Monaco, monospace;
     font-style: oblique;
-    color: white;
+    color: black;
     /*hug the bottom-right corner:*/
     position: fixed;
     bottom: 0;
