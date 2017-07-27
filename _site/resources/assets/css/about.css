@@ -1,0 +1,33 @@
+/* coloring the columns:
+   see the following link for color swatches:
+   http://en.wikipedia.org/wiki/List_of_colors_%28compact%29
+*/
+
+@font-face {
+	font-family: 'Rosario';
+	src: url('../fonts/rosario/Rosario-Regular.otf');
+}
+
+#notesbox {
+	background-color: F0EAD6; /* eggshell */
+	height: 100%;
+}
+
+#aboutbox {
+	background-color: CD9575; /* antique brass */
+	height: 100%;
+}
+
+#contactbox {
+	background-color: 96C8A2; /* eton blue */
+	height: 100%;
+}
+
+#colheading {
+	font-family: 'Oswald', sans-serif; /* use oswald google-font */
+	text-align: center;
+}
+
+#blocktext {
+	font-family: 'Rosario';
+}

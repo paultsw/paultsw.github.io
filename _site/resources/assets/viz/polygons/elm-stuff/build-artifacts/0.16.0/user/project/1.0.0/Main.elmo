@@ -1,0 +1,64 @@
+Elm.Main = Elm.Main || {};
+Elm.Main.make = function (_elm) {
+   "use strict";
+   _elm.Main = _elm.Main || {};
+   if (_elm.Main.values) return _elm.Main.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Color = Elm.Color.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Graphics$Collage = Elm.Graphics.Collage.make(_elm),
+   $Graphics$Element = Elm.Graphics.Element.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var randomFloat = function (n) {    return $Basics.toFloat(n) / 10.0;};
+   var randomInteger = function (_p0) {    var _p1 = _p0;return _p1._0 + _p1._1;};
+   var generateDisp = function () {
+      var _p2 = {ctor: "_Tuple2",_0: randomFloat(-1),_1: randomFloat(1)};
+      var x_disp = _p2._0;
+      var y_disp = _p2._1;
+      return {ctor: "_Tuple2",_0: 0.0 + x_disp,_1: 0.0 + y_disp};
+   }();
+   var diameter = 100.0 * randomFloat(11);
+   var nSides = randomInteger({ctor: "_Tuple2",_0: 3,_1: 5});
+   var generateColor = function () {
+      var colors = _U.list([{ctor: "_Tuple4",_0: 0,_1: 72,_2: 186,_3: 0.6}
+                           ,{ctor: "_Tuple4",_0: 0,_1: 127,_2: 255,_3: 0.6}
+                           ,{ctor: "_Tuple4",_0: 163,_1: 193,_2: 173,_3: 0.6}
+                           ,{ctor: "_Tuple4",_0: 220,_1: 20,_2: 60,_3: 0.6}
+                           ,{ctor: "_Tuple4",_0: 227,_1: 66,_2: 52,_3: 0.6}
+                           ,{ctor: "_Tuple4",_0: 255,_1: 40,_2: 0,_3: 0.6}
+                           ,{ctor: "_Tuple4",_0: 68,_1: 215,_2: 168,_3: 0.6}
+                           ,{ctor: "_Tuple4",_0: 169,_1: 186,_2: 167,_3: 0.6}
+                           ,{ctor: "_Tuple4",_0: 49,_1: 120,_2: 115,_3: 0.6}]);
+      return A4($Color.rgba,0,72,186,0.6);
+   }();
+   var generatePolygon = A2($Graphics$Collage.move,generateDisp,A2($Graphics$Collage.filled,generateColor,A2($Graphics$Collage.ngon,nSides,diameter)));
+   var main = A3($Graphics$Collage.collage,
+   1000,
+   800,
+   _U.list([A2($Graphics$Collage.move,
+           {ctor: "_Tuple2",_0: 350.0,_1: 200.0},
+           A2($Graphics$Collage.filled,A4($Color.rgba,0,72,186,0.6),A2($Graphics$Collage.ngon,5,120.0)))
+           ,A2($Graphics$Collage.move,
+           {ctor: "_Tuple2",_0: -100.0,_1: -200.0},
+           A2($Graphics$Collage.filled,A4($Color.rgba,227,66,52,0.6),A2($Graphics$Collage.ngon,4,100.0)))
+           ,A2($Graphics$Collage.move,
+           {ctor: "_Tuple2",_0: -10.0,_1: 5.0},
+           A2($Graphics$Collage.filled,A4($Color.rgba,68,215,168,0.6),A2($Graphics$Collage.ngon,3,220.0)))
+           ,A2($Graphics$Collage.move,
+           {ctor: "_Tuple2",_0: -200.0,_1: 200.0},
+           A2($Graphics$Collage.filled,A4($Color.rgba,49,120,115,0.6),A2($Graphics$Collage.ngon,7,140.0)))]));
+   return _elm.Main.values = {_op: _op
+                             ,main: main
+                             ,generatePolygon: generatePolygon
+                             ,generateColor: generateColor
+                             ,nSides: nSides
+                             ,diameter: diameter
+                             ,generateDisp: generateDisp
+                             ,randomInteger: randomInteger
+                             ,randomFloat: randomFloat};
+};
