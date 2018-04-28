@@ -5,18 +5,18 @@ description:      > # this means to ignore newlines until no-indent
   and computer science to bioinformatics and 
   economics.
 disqus_shortname: 
-reading_time:     true
+reading_time:     false
 words_per_minute: 60
 # Your site's domain goes here (eg: https://mmistakes.github.io, http://yourdomain.com, etc)
 # When testing locally leave blank or use http://localhost:4000
-url:
+url: http://ptsw.ca
 
 # Owner/author information
 owner:
   name:           Paul Tang
   avatar:         avatar.jpg
-  bio:            "Your bio goes here. It shouldn't be super long but a good sentence or two should suffice."
-  email:          you@email.com
+  bio:            "Software developer broadly interested in math/cs/ml for bioinformatics and economics."
+  email:          
   # Social networking links used in footer. Update and remove as you like.
   twitter:        
   facebook:       
@@ -37,7 +37,7 @@ timezone:    America/Toronto
 future:      false  # publish future dated posts --  true, false (default) 
 highlighter: rouge
 markdown:    kramdown
-gems:
+plugins:
   - jekyll-sitemap
   - jekyll-paginate
   - jekyll-gist
@@ -47,7 +47,7 @@ sass:
   style: compressed
 
 # https://github.com/mojombo/jekyll/wiki/Permalinks
-permalink:   /:categories/:title/
+permalink:   /:year/:month/:day/:title/
 
 # Number of posts to show on home page
 paginate: 5
