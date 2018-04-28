@@ -5675,17 +5675,24 @@ Elm.Main.make = function (_elm) {
 <script type="text/javascript">Elm.fullscreen(Elm.Main)</script>
 <!-- Info Box -->
 <!-- This block should always appear here and is separate from the viz. -->
+<!-- (NB. the margins should be exactly -0.50x the width/height.) -->
 <style>
 #infobox {
-	margin: 0 auto;
+	border-style: dashed;
+	width: 300px;
+	height: 150px;
+	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	margin: -150px -75px -75px -150px;
 }
 </style>
 <div id="infobox">
     <ul style="list-style-type: lower-greek">
-		<li><b>Paul SW. Tang</b></li>
-		<li>Viz via <a href="http://elm-lang.org/">Elm-lang</a></li>
+		<li><b>Paul S. Tang / 鄧信和</b></li>
 		<li><a href="/about">About Me</a></li>
 		<li><a href="/posts">Blog</a></li>
+		<li>Viz made with <a href="http://elm-lang.org/">Elm-lang</a></li>
     </ul>
 </div>
 <!--/Info Box-->
