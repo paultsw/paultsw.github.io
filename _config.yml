@@ -1,87 +1,36 @@
-title:            PTSW
-description:      > # this means to ignore newlines until no-indent
-  A blog about stochastic ways of seeing;
-  posts about applications of mathematics
-  and computer science to bioinformatics and 
-  economics.
-disqus_shortname: 
-reading_time:     false
-words_per_minute: 60
-# Your site's domain goes here (eg: https://mmistakes.github.io, http://yourdomain.com, etc)
-# When testing locally leave blank or use http://localhost:4000
-url: https://ptsw.ca
+name: pt and pt accessories
+description: >
+    Paul S. Tang
+about: >
+    Big fan of nonparametric samplers.
 
-# Owner/author information
+master_repo: true
+url: "https://ptsw.ca"
+markdown: kramdown
+highlighter: rouge
+
+plugins: ['jekyll-paginate', 'jekyll-gist', 'jekyll-feed']
+
+#paginate: 4
+
+logo:             logo.png
+disqus_shortname:
+
+rtl: false
 owner:
-  name:           Paul Tang
-  avatar:         avatar.jpg
-  bio:            "Software developer broadly interested in math/cs/ml for bioinformatics and economics."
-  email:          
+  name:           "Paul Tang"
+  #avatar:         "https://avatars2.githubusercontent.com/u/1909634?s=460&v=4"
+  #email:          "ptsw1990 -at- gmail -dot- com"
   # Social networking links used in footer. Update and remove as you like.
-  twitter:        
-  facebook:       
-  github:         
-  stackexchange:  
-
-# Background image to be tiled on all pages
-background: 
+  twitter: _ptsw
+  github: https://github.com/paultsw
+  stackexchange: https://stackoverflow.com/users/3141064/ptsw
+  #linkedin: (N/A)
+  # For Google Authorship https://plus.google.com/authorship
+  #google_plus:
 
 # Analytics and webmaster tools stuff goes here
-google_analytics:   
-google_verify:      
+#google_analytics:
+#google_verify:
 # https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
-bing_verify:         
-
-# http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone:    America/Toronto
-future:      false  # publish future dated posts --  true, false (default) 
-highlighter: rouge
-markdown:    kramdown
-plugins:
-  - jekyll-sitemap
-  - jekyll-paginate
-  - jekyll-gist
-  - jekyll-feed
-sass:
-  sass_dir: _sass
-  style: compressed
-
-# https://github.com/mojombo/jekyll/wiki/Permalinks
-permalink:   /:year/:month/:day/:title/
-
-# Number of posts to show on home page
-paginate: 5
-
-kramdown:
-  input: GFM
-  auto_ids: true
-  footnote_nr: 1
-  entity_output: as_char
-  toc_levels: 1..6
-  enable_coderay: false
-
-include: 
-  - .htaccess
-exclude: 
-  - "*.less"
-  - "*.sublime-project"
-  - "*.sublime-workspace"
-  - .asset-cache
-  - .bundle
-  - .jekyll-assets-cache
-  - .sass-cache
-  - CHANGELOG
-  - Capfile
-  - Gemfile
-  - Gruntfile.js
-  - LICENSE
-  - README
-  - Rakefile
-  - config
-  - gulpfile.js
-  - lib
-  - log
-  - node_modules
-  - package.json
-  - spec
-  - tmp
+#bing_verify:

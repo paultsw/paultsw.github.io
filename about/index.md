@@ -1,22 +1,21 @@
 ---
-layout: page
-title: Paul Tang | 鄧信和
-comments: false
-modified: 2018-04-01
-share: false
+layout: default
+title: About
 ---
-### About Me
-My background is in mathematics and computer science; broadly, I am interested in statistical and probabilistic computational models for genomics and economics.
 
-My name in Cantonese is approximately pronounced "taang seon wo" (hence the initials).
+Paul S. Tang (鄧信和)
+=====================
 
-### Code
-My Github account: [paultsw](https://github.com/paultsw)
+{{site.about}}
 
-Writing
--------
-To be updated with my long-form writing soon. Until then, see "posts".
+Me
+--
+I'm a research engineer working in cancer bioinformatics, where I try to solve problems in sequence analysis, transcriptomics, and genomics with tools from probabilistic modelling and machine learning.
 
-Code
+This Site
+---------
+I've been trying to blog more, I swear. Aside from that, it also serves as a catalog of all the stuff I do --- see the descriptively titled link to "stuff" in the header.
+
+Also
 ----
-To Be updated; until then, see my github account.
+This blog is based on Vinit Kumar's <a href="https://github.com/vinitkumar/white-paper">white-paper</a> theme. I find it refreshingly minimal. I added a couple of minor modifications to make it more anti-social.
