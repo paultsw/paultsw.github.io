@@ -14,6 +14,8 @@ I'm a research engineer working in cancer bioinformatics, where I try to solve p
 
 Have something private to tell me? Reach me at `ptsw -at- protonmail -dot- com`.
 
+![Standing by the door.](https://ptsw.ca/images/me.jpg "Me")
+
 This Site
 ---------
 I've been trying to blog more, I swear. Aside from that, it also serves as a catalog of all the stuff I do --- see the descriptively titled link to "stuff" in the header.
