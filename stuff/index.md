@@ -3,15 +3,16 @@ layout: default
 title: Stuff
 ---
 
-Things I Did and Am Doing
-=========================
+Things I'm Working On
+=====================
 
 I like to occupy my time with stuff. 
 
 Code
 ----
-I've been meaning to fill this with more details. Until then, check out my [github page](https://github.com/paultsw).
+Check out my [github page](https://github.com/paultsw).
 
 Writing
 -------
-I'm going to update this soon once I convince myself that my long-form writing isn't awful. (Until then, check out the blog!)
+I'm working on polishing up some long-form notes on various deeper topics in mathematics and computer science.
+(Until that's done, check out the blog!)
