@@ -106,11 +106,11 @@ $$
 w \sim \mathcal{N}(\mu_w, \Sigma_w),
 $$
 
-then the following alternating sampling steps constitute a Gibbs sampler for the posterior $$p(w|u,x,y)$$:
+then the following alternating sampling steps constitute a Gibbs sampler for the posterior:
 
 $$
 \begin{align}
-& u|w,x, y=0 \sim \mathcal{N}(\psi, 1) [u < 0]; \\
+& u|w, x, y=0 \sim \mathcal{N}(\psi, 1) [u < 0]; \\
 & u|w, x, y=1 \sim \sim \mathcal{N}(\psi, 1) [y \geq 0]; \\
 & w|u,x,y \sim \mathcal{N}(V(\Sigma_w^{-1} \mu_w + X^\top Y), \Sigma) \\
 \end{align}
