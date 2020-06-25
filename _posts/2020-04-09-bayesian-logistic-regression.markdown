@@ -177,7 +177,15 @@ $$
 \frac{(\exp(\psi))^a}{(1+\exp(\psi))^b} = \frac{\exp(\kappa \psi)}{2^b} \int_0^\infty \exp(-u\psi^2 / 2) p(u) du,
 $$
 
-where $$\kappa := a - \frac{b}{2}$$. Further, we have that the conditional distribution $$p(u | \psi) = PG(b,\psi)$$ when
+where
+$$
+\kappa := a - (b/2).
+$$
+Further, we have that the conditional distribution
+$$
+p(u | \psi) = PG(b,\psi)
+$$
+when
 
 $$
 (u,\psi) \propto \exp(-u\psi^2 / 2) p(u).
