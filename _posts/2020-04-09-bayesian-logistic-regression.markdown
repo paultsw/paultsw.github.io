@@ -152,10 +152,10 @@ $$
 PG(b,z) =^{D} \frac{1}{2^\pi^2} \sum_{k=1}^{\infty} \frac{\gamma_k}{(k - 1/2)^2 + z^2/(4\pi^2)},
 $$
 
-where
+where the numerators are random i.i.d. draws from the same Gamma distribution
 
 $$
-\forall k \in \mathbb{N}, \, \gamma_k \sim^{\mbox{iid}} \Gamma(b,1)
+\forall k \in \mathbb{N}, \, \gamma_k \sim \Gamma(b,1)
 $$
 
 and indeed this offers a naive way to sample from $$PG(b,z)$$ --- sample several times from a gamma and keep a running weighted sum until the running variance falls below a threshold. However a much more efficient sampler based on rejection sampling is given in the paper, following work by Devroye [(2009)](https://econpapers.repec.org/article/eeestapro/v_3a79_3ay_3a2009_3ai_3a21_3ap_3a2251-2259.htm) based on his [groundbreaking book on sampling methods](http://www.nrbook.com/devroye/). I won't delve into the details, but a naive Python-based implementation is contained within the accompanying [github repo](https://github.com/paultsw/polya-gamma-post/) for this blog post.
