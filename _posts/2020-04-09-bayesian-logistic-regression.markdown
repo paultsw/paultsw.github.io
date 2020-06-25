@@ -200,18 +200,22 @@ $$
 combining this likelihood with the above theorem gives the following Gibbs sampling strategy:
 
 $$
-w \sim \mathcal{N}(\mu, \Sigma)
-u | w \sim PG(1,\psi)
-w | u, x, y \sim \mathcal{N}(m_u, V_u)
+\begin{align}
+& w \sim \mathcal{N}(\mu, \Sigma) \\
+& u | w \sim PG(1,\psi) \\
+& w | u, x, y \sim \mathcal{N}(m_u, V_u) \\
+\end{align}
 $$
 
 where
 
 $$
-V_u := (X^\top U X + \Sigma^{-1})^{-1},
-m_u := V_u(X^\top \kappa + \Sigma^{-1} \mu),
-\kappa := (y_1 - \frac{1}{2}, y_2 - \frac{1}{2}, \ldots, y_N - \frac{1}{2}),
-U := \mbox{diag}(u_1, u_2, \ldots, u_N).
+\begin{align}
+& V_u := (X^\top U X + \Sigma^{-1})^{-1}, \\
+& m_u := V_u(X^\top \kappa + \Sigma^{-1} \mu), \\
+& \kappa := (y_1 - \frac{1}{2}, y_2 - \frac{1}{2}, \ldots, y_N - \frac{1}{2}), \\
+& U := \mbox{diag}(u_1, u_2, \ldots, u_N). \\
+\end{align}
 $$
 
 In python, the above can be implemented in thirteen lines of code:
