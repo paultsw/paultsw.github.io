@@ -5,7 +5,8 @@ date:   2020-04-09 15:15:58 -0400
 tags: math bayes stats
 share: false
 ---
-Let's say you want to model binary outcomes. This can be expressed as a model of the form \\( p(Y|X) = Bern(s(X)) \\) for some function \\( s(\cdot) \\). This is simple if you want a point estimate of `s(X)` --- just perform a logistic regression. But what do we do if we want to have a Bayesian interpretation?
+
+Let's say you want to model binary outcomes. This can be expressed as a model of the form \\( p(Y|X) = Bern(s(X)) \\) for some function \\( s(\cdot) \\). This is simple if you want a point estimate of \\( s(X) \\) --- just perform a logistic regression. But what do we do if we want to have a Bayesian interpretation?
 
 In this blog post, we'll look at how we can fit a Bayesian interpretation onto logistic regression via a novel distribution called the _Polya-Gamma_ distribution. The first section will review two popular ways to model dependent binary outcomes: the logistic regression model and the probit regression model. The latter readily admits a Bayesian interpretation thanks to a convenient link function that allows us to sample from the posterior via a (so-called) _data augmentation trick_. The former, until recently, did not admit a similar trick due to complications with the form of the logistic function. To permit this approach, we introduce the Polya-Gamma distribution of Polson et al in section 3. Finally, we present a data aumentation trick that permits bayesian inference for the logistic regression model using the novel Polya-Gamma distribution, followed by some concluding thoughts and some references.
 
@@ -15,7 +16,7 @@ The logistic model and the probit model
 ---------------------------------------
 Broadly, there are two popular models for binary outcomes: the _logistic regression_ model, traditionally favored by frequentists, and the _probit regression_ model, traditionally favored by bayesians due to the relative ease of sampling from the posterior.
 
-Formally, we have the following context: say we have `N \gg 1` datapoints `D := \{ (x_1,y_1), \ldots (x_N, y_N) \}` where each `x_i \in \mathbb{R}^K` is a vector of regressors and `y_i \in \{0,1\}` is a binary response. Set `X = \{ x_i \}_{i=1}^N` and `Y = \{ y_i \}_{i=1}^N`. Assume that each datapoint `(x,y)` is generated independently from the same identical process and that random `y` is dependent upon deterministic `x`. Let `w := (b_1, w_2, \ldots, w_K)` be a vector of parameters, which relate to `X` and `Y` in a way dependent upon the model (to be discussed further below).
+Formally, we have the following context: say we have \\( N \gg 1\\) datapoints \\( D := \{ (x_1,y_1), \ldots (x_N, y_N) \}\\) where each \\(x_i \in \mathbb{R}^K\\) is a vector of regressors and \\(y_i \in \{0,1\}\\) is a binary response. Set \\(X = \{ x_i \}_{i=1}^N\\) and `Y = \{ y_i \}_{i=1}^N\\). Assume that each datapoint \\((x,y)\\) is generated independently from the same identical process and that random \\(y\\) is dependent upon deterministic \\(x\\). Let \\(w := (b_1, w_2, \ldots, w_K)\\) be a vector of parameters, which relate to \\(X\\) and \\(Y\\) in a way dependent upon the model (to be discussed further below).
 
 Bayesian models involve the following ingredients:
 * a _prior_ `p(w)` distribution on the vector of parameters;
