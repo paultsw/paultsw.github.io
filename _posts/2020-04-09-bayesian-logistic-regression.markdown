@@ -24,7 +24,12 @@ $$
 \mathcal{L}(w;D) := p(D|w) = \prod_i p(y_i|x_i, w),
 $$
 
-also called a _sampling_ or _data_ distribution; and a _posterior_ $$p(w|D)$$, which is determined by the form of the above two distributions.
+also called a _sampling_ or _data_ distribution; and a _posterior_
+$$
+p(w|D),
+$$
+
+which is determined by the form of the above two distributions.
 
 The three distributions are linked via Bayes' theorem:
 
