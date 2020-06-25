@@ -6,7 +6,7 @@ tags: math bayes stats
 share: false
 ---
 
-Let's say you want to model binary outcomes. This can be expressed as a model of the form \\( p(Y|X) = Bern(s(X)) \\) for some function \\( s(\cdot) \\). This is simple if you want a point estimate of \\( s(X) \\) --- just perform a logistic regression. But what do we do if we want to have a Bayesian interpretation?
+Let's say you want to model binary outcomes. This is simple if you want a maximum likelihood estimate of a linear set of weights --- just perform a logistic regression. But what do we do if we want to perform Bayesian inference?
 
 In this blog post, we'll look at how we can fit a Bayesian interpretation onto logistic regression via a novel distribution called the _Polya-Gamma_ distribution. The first section will review two popular ways to model dependent binary outcomes: the logistic regression model and the probit regression model. The latter readily admits a Bayesian interpretation thanks to a convenient link function that allows us to sample from the posterior via a (so-called) _data augmentation trick_. The former, until recently, did not admit a similar trick due to complications with the form of the logistic function. To permit this approach, we introduce the Polya-Gamma distribution of Polson et al in section 3. Finally, we present a data aumentation trick that permits bayesian inference for the logistic regression model using the novel Polya-Gamma distribution, followed by some concluding thoughts and some references.
 
