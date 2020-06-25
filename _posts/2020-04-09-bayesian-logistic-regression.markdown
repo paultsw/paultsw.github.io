@@ -18,7 +18,7 @@ Broadly, there are two popular models for binary outcomes: the _logistic regress
 
 Formally, we have the following context: say we have $$N \gg 1$$ datapoints $$D := \{ (x_1,y_1), \ldots (x_N, y_N) \}$$ where each $$x_i \in \mathbb{R}^K$$ is a vector of regressors and $$y_i \in \{0,1\}$$ is a binary response. Set $$X = \{ x_i \}_{i=1}^N$$ and $$Y = \{ y_i \}_{i=1}^N$$. Assume that each datapoint $$(x,y)$$ is generated independently from the same identical process and that random $$y$$ is dependent upon deterministic $$x$$. Let $$w := (w_1, w_2, \ldots, w_K)$$ be a vector of parameters, which relate to $$X$$ and $$Y$$ in a way dependent upon the model (to be discussed further below).
 
-Bayesian models involve the following three ingredients: a _prior_ $$p(w)$$ distribution on the vector of parameters; a _likelihood
+Bayesian models involve the following three ingredients: a _prior_ $$p(w)$$ distribution on the vector of parameters; a _likelihood_
 
 $$
 \mathcal{L}(w;D) := p(D|w) = \prod_{i} p(y_i|x_i, w),
