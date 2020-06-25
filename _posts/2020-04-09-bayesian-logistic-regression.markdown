@@ -37,41 +37,41 @@ $$
 
 The probit model and the logistic regression model are examples of _generalized linear models_ (GLMs), a type of model in which the response variables `y` are drawn from a known distribution `F(y; \theta)` in which the parameters `\theta = (\theta_1, \theta_2, \ldots, \theta_m)` defining the distribution is known, deterministic function `\theta = g^{-1}(\psi)` of the linear combination `\psi := x^\top w`. In other words, we add a "nonlinear layer" on top of the linear combination `\psi` to pick a particular distribution
 
-```
+$$
 f = F(y; g^{-1}(\psi)) = F(y; g^{-1}(x^\top w))
-```
+$$
 
 from which we draw `y`. `F` is called _distribution_ of the GLM and `g` is called the _link function_.
 
 For the probit regression model, we use `g(q) = \Phi^{-1}(\psi)` the inverse CDF of the standard normal, and `F = Bern(q)`; this gives us
 
-```
+$$
 y \sim Bern(\Phi(x^\top w))
-```
+$$
 
 and a likelihood function
 
-```
+$$
 \mathcal{L}(w; D) = \prod_{i=1}^N p(y_i | w) = \prod_{i=1}^N \Phi(x_i^\top w)^{y_i} (1 - \Phi(x_i^\top w))^{1-y_i}.
-```
+$$
 
 For the logistic regression model, we use `F = \mbox{Bern}(\sigma(\psi))` for inverse link function `\sigma` the logistic function (hence the name):
 
-```
+$$
 \sigma(u) = (1 + \exp(-u))^{-1} \; \forall u \in \mathbb{R}.
-```
+$$
 
 Note also that this means we can interpret `\psi` as the _log-odds_ of the parameter `q` for `F = \mbox{Bern}(q)`, as we have
 
-```
+$$
 \sigma(\ln \frac{q}{1-q}) = (1 + \frac{1-q}{q})^{-1} = q.
-```
+$$
 
 For the logistic regression model, we obtain the following likelihood:
 
-```
+$$
 \mathcal{L}(w; D) = \prod_{i=1}^N p(y_i | w) = \prod_{i=1}^N \sigma(x_i^\top w)^{y_i} (1 - \sigma(x_i^\top w))^{1-y_i}.
-```
+$$
 
 Bayesian inference for the probit model via data augmentation
 -------------------------------------------------------------
@@ -79,39 +79,39 @@ Why do bayesians prefer the probit regression model over the logistics regressio
 
 Fundamentally, note that the probit regression model in the previous section can be equivalently expressed as a hierarchical latent variable model:
 
-```
+$$
 u_i \sim \mathcal{N}(\psi, 1) = \mathcal{N}(x_i^\top w, 1)
 y_i := [u_i > 0] = 1 \mbox{ if } (u_i > 0), \; \; 0 \mbox{ if } (u_i \leq 0)
-```
+$$
 
 ...where we've used the Iverson bracket `[u_i > 0]` to indicate a binary function equal to one if and only if the statement inside the bracket is true.
 
 Why is this equivalent to the probit regression model? The key is to notice that
 
-```
+$$
 \Phi(\psi) = \mathbb{P}(\mathcal{N}(0,1) \leq \psi) = \mathbb{P}(\mathcal{N}(\psi,1) > 0) = \mathbb{P}(u > 0),
-```
+$$
 
 which gives the equivalence between the latent variable model and the original statement of the probit regression model using the Bernoulli distribution.
 
 Finally, this gives an efficient Gibbs sampler for the posterior `p(w | X, Y)` when the prior `p(w)` is normally distributed, thanks to the fact that the normal distribution is conjugate to itself: if we place a normal prior
-```
+$$
 w \sim \mathcal{N}(\mu_w, \Sigma_w),
-```
+$$
 
 then the following alternating sampling steps constitute a Gibbs sampler for the posterior `p(w|u,x,y)`:
 
-```
+$$
 u|w,x, y=0 \sim \mathcal{N}(\psi, 1) [u < 0];
 u|w, x, y=1 \sim \sim \mathcal{N}(\psi, 1) [y \geq 0];
 w|u,x,y \sim \mathcal{N}(V(\Sigma_w^{-1} \mu_w + X^\top Y), \Sigma)
-```
+$$
 
 where
 
-```
+$$
 V := (\Sigma_w^{-1} + X^\top X)^{-1}.
-```
+$$
 
 For the full derivation of the above Gibbs sampler, consult [Albert & Chib (1993)](https://www.tandfonline.com/doi/abs/10.1080/01621459.1993.10476321), which was the first to derive the strategy.
 
@@ -120,16 +120,16 @@ The Polya-Gamma distribution
 ----------------------------
 It's difficult to use the same data augmentation trick to perform posterior inference for the logistic model, which in the latent variable formulation assumes that errors in the latent variable are distributed as a logistic rather than a normal:
 
-```
+$$
 u_i \sim \mbox{Lo}(\psi, 1) = \mbox{Lo}(x_i^\top w, 1)
 y_i := [u_i > 0] = 1 \mbox{ if } (u_i > 0), \; \; 0 \mbox{ if } (u_i \leq 0)
-```
+$$
 
 where the density of the standard logistic distribution is given as
 
-```
+$$
 f_{\mbox{Lo}}(x; 0, 1) = \frac{\exp(-x)}{(1+\exp(-x))^2};
-```
+$$
 
 the logistic distribution is so named because the CDF of the standard logistic distribution is the logistic function `(1+\exp(-x))^{-1}`.
 
@@ -139,9 +139,9 @@ For a long time, there was no way to efficiently generate exact samples from the
 
 Formally, the class of Polya-Gamma distributions is equivalent in law to an infinite mixture of Gamma distributions:
 
-```
+$$
 PG(b,z) =^{D} \frac{1}{2^\pi^2} \sum_{k=1}^{\infty} \frac{\gamma_k}{(k - \frac{1}{2})^2 + \frac{z^2}{4\pi^2}}, \; \gamma_k \sim^{\mbox{iid}} \Gamma(b,1);
-```
+$$
 
 and indeed this offers a naive way to sample from `PG(b,z)` --- sample several times from a gamma and keep a running weighted sum until the running variance falls below a threshold. However a much more efficient sampler based on rejection sampling is given in the paper, following work by Devroye [(2009)](https://econpapers.repec.org/article/eeestapro/v_3a79_3ay_3a2009_3ai_3a21_3ap_3a2251-2259.htm) based on his [groundbreaking book on sampling methods](http://www.nrbook.com/devroye/). I won't delve into the details, but a naive Python-based implementation is contained within the accompanying [github repo](https://github.com/paultsw/polya-gamma-post/) for this blog post.
 
@@ -158,41 +158,41 @@ Bayesian inference for logistic regression using Pólya-Gammas
 -------------------------------------------------------------
 What's notable about the Polya-Gamma distribution is that it allows us to develop a Gibbs sampler for the posterior of the above model, via a latent variable trick much like what we did with the probit model: the paper notes that the Polya-Gamma distribution has the following unique property that facilitate the existence of a Gibbs sampler: for any integer `b > 0`, let `p(u)` be the density of a random variable `u \sim PG(b,0)`. Then for all `a \in \mathbb{R}` and `\psi \in \mathbb{R}`, the following holds:
 
-```
+$$
 \frac{(\exp(\psi))^a}{(1+\exp(\psi))^b} = \frac{\exp(\kappa \psi)}{2^b} \int_0^\infty \exp(-u\psi^2 / 2) p(u) du,
-```
+$$
 
 where `\kappa := a - \frac{b}{2}`. Further, we have that the conditional distribution `p(u | \psi) = PG(b,\psi)` when
 
-```
+$$
 (u,\psi) \propto \exp(-u\psi^2 / 2) p(u).
-```
+$$
 This is a useful property because the likelihood of observing a single datapoint in the logistic regression model is given by:
 
-```
+$$
 \mathcal{L}_i(w) = \frac{(\exp(x_i^\top w))^{y_i}}{1 + \exp(x_i^\top w)};
-```
+$$
 
 combining this likelihood with the above theorem gives the following Gibbs sampling strategy:
 
-```
+$$
 w \sim \mathcal{N}(\mu, \Sigma)
 u | w \sim PG(1,\psi)
 w | u, x, y \sim \mathcal{N}(m_u, V_u)
-```
+$$
 
 where
 
-```
+$$
 V_u := (X^\top U X + \Sigma^{-1})^{-1},
 m_u := V_u(X^\top \kappa + \Sigma^{-1} \mu),
 \kappa := (y_1 - \frac{1}{2}, y_2 - \frac{1}{2}, \ldots, y_N - \frac{1}{2}),
 U := \mbox{diag}(u_1, u_2, \ldots, u_N).
-```
+$$
 
 In python, the above can be implemented in thirteen lines of code:
 
-```
+{% highlight python %}
 def sample_posterior_logistic_regression(beta_mean, beta_cov, X, Y, burnin=20, nsamples=100):
     """
     Given a beta RV with a multivariate normal prior N(beta_mean, beta_cov), sample from the
@@ -222,7 +222,7 @@ def sample_posterior_logistic_regression(beta_mean, beta_cov, X, Y, burnin=20, n
         # append sample to list of samples
         posterior_samples.append(beta)
     return np.array(posterior_samples)
-```
+{% endhighlight %}
 
 In the github repo corresponding to this blog post, I've added a [Jupyter notebook](https://github.com/paultsw/polya-gamma-post/blob/master/Bayesian%20Inference%20for%20Logistic%20Regression.ipynb) demonstrating the application of the Gibbs sampler for Bayesian inference on a logistic regression task based on the [Pima Indian diabetes dataset](https://www.kaggle.com/uciml/pima-indians-diabetes-database).
 
