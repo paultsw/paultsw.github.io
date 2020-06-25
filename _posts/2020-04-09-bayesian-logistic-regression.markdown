@@ -149,7 +149,7 @@ For a long time, there was no way to efficiently generate exact samples from the
 Formally, the class of Polya-Gamma distributions is equivalent in law to an infinite mixture of Gamma distributions:
 
 $$
-PG(b,z) = \frac{1}{2^\pi^2} \sum_{k=1}^{\infty} \frac{\gamma_k}{(k - 1/2)^2 + z^2/(4\pi^2)},
+PG(b,z) = (2^\pi^2)^{-1} \sum_{k=1}^{\infty} \frac{\gamma_k}{(k - 1/2)^2 + z^2/(4\pi^2)},
 $$
 
 where the equality refers to equality of distributions (i.e., in law), and the numerators are random i.i.d. draws from the same Gamma distribution:
@@ -164,6 +164,8 @@ For a glimpse of the $$PG(b,z)$$ distribution, I've reproduced some of the densi
 
 First, holding the first parameter constant and varying the second parameter:
 ![PG(1,c) for varying 'c'](https://raw.githubusercontent.com/paultsw/polya-gamma-post/master/images/PG_1_c.png "PG(1,c) for varying 'c'")
+
+
 Then, varying the first parameter while holding the second parameter fixed:
 ![PG(b,0) for varying 'b'](https://raw.githubusercontent.com/paultsw/polya-gamma-post/master/images/PG_b_0.png "PG(b,0) for varying 'b'")
 
