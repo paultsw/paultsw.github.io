@@ -190,6 +190,7 @@ when
 $$
 (u,\psi) \propto \exp(-u\psi^2 / 2) p(u).
 $$
+
 This is a useful property because the likelihood of observing a single datapoint in the logistic regression model is given by:
 
 $$
