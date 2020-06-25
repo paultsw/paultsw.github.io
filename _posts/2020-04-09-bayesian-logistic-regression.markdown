@@ -16,24 +16,24 @@ The logistic model and the probit model
 ---------------------------------------
 Broadly, there are two popular models for binary outcomes: the _logistic regression_ model, traditionally favored by frequentists, and the _probit regression_ model, traditionally favored by bayesians due to the relative ease of sampling from the posterior.
 
-Formally, we have the following context: say we have \( N \gg 1\) datapoints \( D := \{ (x_1,y_1), \ldots (x_N, y_N) \}\) where each \(x_i \in \mathbb{R}^K\) is a vector of regressors and \(y_i \in \{0,1\}\) is a binary response. Set \(X = \{ x_i \}_{i=1}^N\) and \(Y = \{ y_i \}_{i=1}^N\). Assume that each datapoint \((x,y)\) is generated independently from the same identical process and that random \(y\) is dependent upon deterministic \(x\). Let \(w := (b_1, w_2, \ldots, w_K)\) be a vector of parameters, which relate to \(X\) and \(Y\) in a way dependent upon the model (to be discussed further below).
+Formally, we have the following context: say we have \\( N \gg 1\\) datapoints \\( D := \{ (x_1,y_1), \ldots (x_N, y_N) \}\\) where each \\(x_i \in \mathbb{R}^K\\) is a vector of regressors and \\(y_i \in \{0,1\}\\) is a binary response. Set \\(X = \{ x_i \}_{i=1}^N\\) and \\(Y = \{ y_i \}_{i=1}^N\\). Assume that each datapoint \\((x,y)\\) is generated independently from the same identical process and that random \\(y\\) is dependent upon deterministic \\(x\\). Let \\(w := (w_1, w_2, \ldots, w_K)\\) be a vector of parameters, which relate to \\(X\\) and \\(Y\\) in a way dependent upon the model (to be discussed further below).
 
 Bayesian models involve the following ingredients:
-* a _prior_ `p(w)` distribution on the vector of parameters;
-* a _likelihood_ `\mathcal{L}(w;D) := p(D|w) = \prod_{i} p(y_i|x_i, w)` (also called a _sampling_ or _data_ distribution);
-* a _posterior_ `p(w|D)`, which is determined by the form of the above two distributions.
+* a _prior_ \\(p(w)\\) distribution on the vector of parameters;
+* a _likelihood_ \\(\mathcal{L}(w;D) := p(D|w) = \prod_{i} p(y_i|x_i, w)\\) (also called a _sampling_ or _data_ distribution);
+* a _posterior_ \\(p(w|D)\\), which is determined by the form of the above two distributions.
 
 The three distributions are linked via Bayes' theorem:
 
-```
+$$
 p(w|D) \propto p(D|w) \cdot p(w).
-```
+$$
 
 Note that frequentist statistics focus primarily on obtaining point estimates of properties of the likelihood function, e.g.
 
-```
+$$
 \hat{\beta} = \argmax_\beta \mathcal{L}(\beta|D).
-```
+$$
 
 The probit model and the logistic regression model are examples of _generalized linear models_ (GLMs), a type of model in which the response variables `y` are drawn from a known distribution `F(y; \theta)` in which the parameters `\theta = (\theta_1, \theta_2, \ldots, \theta_m)` defining the distribution is known, deterministic function `\theta = g^{-1}(\psi)` of the linear combination `\psi := x^\top w`. In other words, we add a "nonlinear layer" on top of the linear combination `\psi` to pick a particular distribution
 
