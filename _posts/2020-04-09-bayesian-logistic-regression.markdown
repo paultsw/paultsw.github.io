@@ -149,7 +149,7 @@ For a long time, there was no way to efficiently generate exact samples from the
 Formally, the class of Polya-Gamma distributions is equivalent in law to an infinite mixture of Gamma distributions:
 
 $$
-PG(b,z) =^{D} \frac{1}{2^\pi^2} \sum_{k=1}^{\infty} \frac{\gamma_k}{(k - \frac{1}{2})^2 + \frac{z^2}{4\pi^2}},
+PG(b,z) =^{D} \frac{1}{2^\pi^2} \sum_{k=1}^{\infty} \frac{\gamma_k}{(k - 1/2)^2 + z^2/(4\pi^2)},
 $$
 
 where
