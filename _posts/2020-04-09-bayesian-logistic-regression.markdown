@@ -12,8 +12,10 @@ In this blog post, we'll look at how we can fit a Bayesian interpretation onto l
 
 _(N.B.: the proper spelling for the distribution is "Pólya-Gamma" --- named after mathematician George Pólya --- but I'll sometimes spell it as "Polya-Gamma" due to the lack of diacritic markers on my keyboard.)_
 
+- - - - - - - - - -
+
 The logistic model and the probit model
----------------------------------------
+=======================================
 Broadly, there are two popular models for binary outcomes: the _logistic regression_ model, traditionally favored by frequentists, and the _probit regression_ model, traditionally favored by bayesians due to the relative ease of sampling from the posterior.
 
 Formally, we have the following context: say we have $$N \gg 1$$ datapoints $$D := \{ (x_1,y_1), \ldots (x_N, y_N) \}$$ where each $$x_i \in \mathbb{R}^K$$ is a vector of regressors and $$y_i \in \{0,1\}$$ is a binary response. Set $$X = \{ x_i \}_{i=1}^N$$ and $$Y = \{ y_i \}_{i=1}^N$$. Assume that each datapoint $$(x,y)$$ is generated independently from the same identical process and that random $$y$$ is dependent upon deterministic $$x$$. Let $$w := (w_1, w_2, \ldots, w_K)$$ be a vector of parameters, which relate to $$X$$ and $$Y$$ in a way dependent upon the model (to be discussed further below).
@@ -80,8 +82,10 @@ $$
 \mathcal{L}(w; D) = \prod_{i=1}^N p(y_i | w) = \prod_{i=1}^N \sigma(x_i^\top w)^{y_i} (1 - \sigma(x_i^\top w))^{1-y_i}.
 $$
 
+- - - - - - - - - -
+
 Bayesian inference for the probit model via data augmentation
--------------------------------------------------------------
+=============================================================
 Why do bayesians prefer the probit regression model over the logistics regression model? A major reason is due to the data augmentation strategy developed by Albert & Chib (see references) that allows for efficient sampling from the posterior distribution $$p(w|D)$$, which in turn relies on the smoothness of the density of the normal distribution.
 
 Fundamentally, note that the probit regression model in the previous section can be equivalently expressed as a hierarchical latent variable model:
@@ -124,9 +128,10 @@ $$
 
 For the full derivation of the above Gibbs sampler, consult [Albert & Chib (1993)](https://www.tandfonline.com/doi/abs/10.1080/01621459.1993.10476321), which was the first to derive the strategy.
 
+- - - - - - - - - -
 
 The Polya-Gamma distribution
-----------------------------
+============================
 It's difficult to use the same data augmentation trick to perform posterior inference for the logistic model, which in the latent variable formulation assumes that errors in the latent variable are distributed as a logistic rather than a normal:
 
 $$
@@ -174,8 +179,10 @@ Then, varying the first parameter while holding the second parameter fixed:
 
 Note that the aberrations on the tail are due to the [kernel density estimation](https://en.wikipedia.org/wiki/Kernel_density_estimation) plotting algorithm, which draws a density by fitting a number of Gaussian kernels to empirical data. The tail may be smoothed out by judicious choice of the bandwidth parameter in the KDE plotting algorithm, but I've elected to avoid doing this for the purposes of this post.
 
+- - - - - - - - - -
+
 Bayesian inference for logistic regression using Pólya-Gammas
--------------------------------------------------------------
+=============================================================
 What's notable about the Polya-Gamma distribution is that it allows us to develop a Gibbs sampler for the posterior of the above model, via a latent variable trick much like what we did with the probit model: the paper notes that the Polya-Gamma distribution has the following unique property that facilitate the existence of a Gibbs sampler: for any integer $$b > 0$$, let $$p(u)$$ be the density of a random variable $$u \sim PG(b,0)$$. Then for all $$a \in \mathbb{R}$$ and $$\psi \in \mathbb{R}$$, the following holds:
 
 $$
@@ -271,14 +278,16 @@ Then, on the Pima Indian diabetes data, I used a normal prior for the weights an
 ![Posterior vs MLE on Pima Indian diabetes data.](https://raw.githubusercontent.com/paultsw/polya-gamma-post/master/images/posterior_vs_mle.png "Posterior vs MLE on Pima Indian diabetes data.")
 {: refdef}
 
+- - - - - - - - - -
 
 Conclusion
-----------
+==========
 Through the above, we can see that the Polya-Gamma distribution permits a flexible bayesian interpretation of the logistic regression model; the original paper by Polson et al actually permits a wider range of discrete binary and count-based regression models to be analyzed through the bayesian framework using the same latent variable data augmentation strategy above. Further investigations are necessary to discover more relevant mathematical properties, but the Polya-Gamma distribution seems to hold a lot of promise for enabling efficient Bayesian inference for a large class of models.
 
+- - - - - - - - - -
 
 References
-----------
+==========
 * The code corresponding to this post is at [`https://github.com/paultsw/polya-gamma-post`](https://github.com/paultsw/polya-gamma-post).
 
 * _Bayesian inference for logistic models using Polya-Gamma latent variables_, Nicholas G. Polson, James G. Scott, Jesse Windle. [(ArXiv)](https://arxiv.org/abs/1205.0310)
