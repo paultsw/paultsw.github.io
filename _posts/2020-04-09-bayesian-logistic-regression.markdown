@@ -163,11 +163,14 @@ Indeed, this offers a naive way to sample from $$PG(b,z)$$ --- sample several ti
 For a glimpse of the $$PG(b,z)$$ distribution, I've reproduced some of the density plots for varying parameters using my sampler.
 
 First, holding the first parameter constant and varying the second parameter:
+{:refdef: style="text-align: center;"}
 ![PG(1,c) for varying 'c'](https://raw.githubusercontent.com/paultsw/polya-gamma-post/master/images/PG_1_c.png "PG(1,c) for varying 'c'")
-
+{: refdef}
 
 Then, varying the first parameter while holding the second parameter fixed:
+{:refdef: style="text-align: center;"}
 ![PG(b,0) for varying 'b'](https://raw.githubusercontent.com/paultsw/polya-gamma-post/master/images/PG_b_0.png "PG(b,0) for varying 'b'")
+{: refdef}
 
 Note that the aberrations on the tail are due to the [kernel density estimation](https://en.wikipedia.org/wiki/Kernel_density_estimation) plotting algorithm, which draws a density by fitting a number of Gaussian kernels to empirical data. The tail may be smoothed out by judicious choice of the bandwidth parameter in the KDE plotting algorithm, but I've elected to avoid doing this for the purposes of this post.
 
@@ -258,11 +261,15 @@ In the github repo corresponding to this blog post, I've added a [Jupyter notebo
 
 The full details are better explored through the notebook, but my ad-hoc implementation seems to work. First, a quick test to visually confirm that the posterior on an artificially-generated dataset has a lower degree of dispersion compared to the prior:
 
+{:refdef: style="text-align: center;"}
 ![Posterior vs prior on artificial data.](https://raw.githubusercontent.com/paultsw/polya-gamma-post/master/images/posterior_vs_prior.png "Posterior vs prior on artificial data.")
+{: refdef}
 
 Then, on the Pima Indian diabetes data, I used a normal prior for the weights and ran the above Gibbs sampler to construct a posterior density for the parameters. I plotted the maximum-likelihood estimates (from `sklearn`'s [logistic regression module](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)) for each weight on top of the sampler-constructed posterior for that weight:
 
+{:refdef: style="text-align: center;"}
 ![Posterior vs MLE on Pima Indian diabetes data.](https://raw.githubusercontent.com/paultsw/polya-gamma-post/master/images/posterior_vs_mle.png "Posterior vs MLE on Pima Indian diabetes data.")
+{: refdef}
 
 
 Conclusion
