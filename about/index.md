@@ -14,7 +14,9 @@ I'm a research software engineer broadly interested in writing programs that use
 
 Have something private to tell me? Reach me at `ptsw -at- protonmail -dot- com`.
 
+{:refdef: style="text-align: center;"}
 ![Standing by the door.](https://ptsw.ca/images/me.jpg "Me")
+{: refdef}
 
 Interests
 ---------

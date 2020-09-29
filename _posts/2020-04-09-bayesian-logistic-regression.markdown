@@ -163,18 +163,18 @@ $$
 \forall k \in \mathbb{N}, \, \gamma_k \sim \Gamma(b,1).
 $$
 
-Indeed, this offers a naive way to sample from $$PG(b,z)$$ --- sample several times from a gamma and keep a running weighted sum until the running variance falls below a threshold. However a much more efficient sampler based on rejection sampling is given in the paper, following work by Devroye [(2009)](https://econpapers.repec.org/article/eeestapro/v_3a79_3ay_3a2009_3ai_3a21_3ap_3a2251-2259.htm) based on his [groundbreaking book on sampling methods](http://www.nrbook.com/devroye/). I won't delve into the details, but a naive Python-based implementation is contained within the accompanying [github repo](https://github.com/paultsw/polya-gamma-post/) for this blog post.
+Indeed, this offers a naive way to sample from $$PG(b,z)$$ --- sample several times from a gamma and keep a running weighted sum until the running variance falls below a threshold. However a much more efficient sampler based on rejection sampling is given in the paper, following work by Devroye [(2009)](https://econpapers.repec.org/article/eeestapro/v_3a79_3ay_3a2009_3ai_3a21_3ap_3a2251-2259.htm) based on his [groundbreaking book on sampling methods](http://www.nrbook.com/devroye/). I won't delve into the details, but a naive Python-based implementation is contained within the accompanying [github repo](https://github.com/paultsw/blogprogs/tree/master/polya_gamma) for this blog post.
 
 For a glimpse of the $$PG(b,z)$$ distribution, I've reproduced some of the density plots for varying parameters using my sampler.
 
 First, holding the first parameter constant and varying the second parameter:
 {:refdef: style="text-align: center;"}
-![PG(1,c) for varying 'c'](https://raw.githubusercontent.com/paultsw/polya-gamma-post/master/images/PG_1_c.png "PG(1,c) for varying 'c'")
+![PG(1,c) for varying 'c'](https://raw.githubusercontent.com/paultsw/blogprogs/master/polya_gamma/images/PG_1_c.png "PG(1,c) for varying 'c'")
 {: refdef}
 
 Then, varying the first parameter while holding the second parameter fixed:
 {:refdef: style="text-align: center;"}
-![PG(b,0) for varying 'b'](https://raw.githubusercontent.com/paultsw/polya-gamma-post/master/images/PG_b_0.png "PG(b,0) for varying 'b'")
+![PG(b,0) for varying 'b'](https://raw.githubusercontent.com/paultsw/blogprogs/master/polya_gamma/images/PG_b_0.png "PG(b,0) for varying 'b'")
 {: refdef}
 
 Note that the aberrations on the tail are due to the [kernel density estimation](https://en.wikipedia.org/wiki/Kernel_density_estimation) plotting algorithm, which draws a density by fitting a number of Gaussian kernels to empirical data. The tail may be smoothed out by judicious choice of the bandwidth parameter in the KDE plotting algorithm, but I've elected to avoid doing this for the purposes of this post.
@@ -264,18 +264,18 @@ def sample_posterior_logistic_regression(beta_mean, beta_cov, X, Y, burnin=20, n
     return np.array(posterior_samples)
 {% endhighlight %}
 
-In the github repo corresponding to this blog post, I've added a [Jupyter notebook](https://github.com/paultsw/polya-gamma-post/blob/master/Bayesian%20Inference%20for%20Logistic%20Regression.ipynb) demonstrating the application of the Gibbs sampler for Bayesian inference on a logistic regression task based on the [Pima Indian diabetes dataset](https://www.kaggle.com/uciml/pima-indians-diabetes-database).
+In the github repo corresponding to this blog post, I've added a [Jupyter notebook](https://github.com/paultsw/blogprogs/blob/master/polya_gamma/Bayesian%20Inference%20for%20Logistic%20Regression.ipynb) demonstrating the application of the Gibbs sampler for Bayesian inference on a logistic regression task based on the [Pima Indian diabetes dataset](https://www.kaggle.com/uciml/pima-indians-diabetes-database).
 
 The full details are better explored through the notebook, but my ad-hoc implementation seems to work. First, a quick test to visually confirm that the posterior on an artificially-generated dataset has a lower degree of dispersion compared to the prior:
 
 {:refdef: style="text-align: center;"}
-![Posterior vs prior on artificial data.](https://raw.githubusercontent.com/paultsw/polya-gamma-post/master/images/posterior_vs_prior.png "Posterior vs prior on artificial data.")
+![Posterior vs prior on artificial data.](https://raw.githubusercontent.com/paultsw/blogprogs/master/polya_gamma/images/posterior_vs_prior.png "Posterior vs prior on artificial data.")
 {: refdef}
 
 Then, on the Pima Indian diabetes data, I used a normal prior for the weights and ran the above Gibbs sampler to construct a posterior density for the parameters. I plotted the maximum-likelihood estimates (from `sklearn`'s [logistic regression module](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)) for each weight on top of the sampler-constructed posterior for that weight:
 
 {:refdef: style="text-align: center;"}
-![Posterior vs MLE on Pima Indian diabetes data.](https://raw.githubusercontent.com/paultsw/polya-gamma-post/master/images/posterior_vs_mle.png "Posterior vs MLE on Pima Indian diabetes data.")
+![Posterior vs MLE on Pima Indian diabetes data.](https://raw.githubusercontent.com/paultsw/blogprogs/master/polya_gamma/images/posterior_vs_mle.png "Posterior vs MLE on Pima Indian diabetes data.")
 {: refdef}
 
 - - - - - - - - - -
@@ -288,7 +288,7 @@ Through the above, we can see that the Polya-Gamma distribution permits a flexib
 
 References
 ==========
-* The code corresponding to this post is at [`https://github.com/paultsw/polya-gamma-post`](https://github.com/paultsw/polya-gamma-post).
+* The code corresponding to this post is at [`https://github.com/paultsw/blogprogs/tree/master/polya_gamma`](https://github.com/paultsw/blogprogs/tree/master/polya_gamma).
 
 * _Bayesian inference for logistic models using Polya-Gamma latent variables_, Nicholas G. Polson, James G. Scott, Jesse Windle. [(ArXiv)](https://arxiv.org/abs/1205.0310)
 
