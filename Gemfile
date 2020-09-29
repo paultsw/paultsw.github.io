@@ -6,4 +6,4 @@ gem "jekyll"
 gem 'jekyll-feed'
 gem "rouge"
 
-gem "kramdown", "~> 1.17"
+gem "kramdown", ">= 2.3.0"
