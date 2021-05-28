@@ -1,4 +1,4 @@
-Personal homepage at `https://ptsw.ca`.
+Personal homepage at `https://ptsw.ca`
 
 This readme is more for my own reference than for your reading pleasure. That being said, if reading the minutiae of blog deployment on Github-Pages is what gets you going, I obviously won't stand in the way of your pleasure.
 
