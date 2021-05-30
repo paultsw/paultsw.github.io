@@ -17,7 +17,10 @@ I'm working on polishing up some long-form notes on various deeper topics in mat
 Papers
 ------
 
-* Workman, R.E., Tang, A.D., *Tang, P.S.* et al.  
+* Workman, RE, Tang, AD, **Tang, PS** et al.  
   Nanopore native RNA sequencing of a human poly(A) transcriptome.  
-  Nat Methods (2019) `doi:10.1038/s41592-019-0617-2`  
-  _Notes: co-first author._
+  Nature Methods (2019) `doi:10.1038/s41592-019-0617-2`  
+
+* Drexler, HL, Choquet, K, Merens, HE, **Tang, PS**, Simpson, JT, Churchman, LS.  
+  Revealing nascent RNA processing dynamics with nano-COP.  
+  Nature Protocols (2021) `doi:10.1038/s41596-020-00469-y`  

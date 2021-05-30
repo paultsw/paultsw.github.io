@@ -21,7 +21,7 @@ Have something private to tell me? Reach me at `ptsw -at- protonmail -dot- com`.
 
 Interests
 ---------
-My current interests are in social theory, where I aspire to analyze opinion polls and financial datasets and interpret the results within social-theoretic and political-economic frameworks. I am also interested in quantitative bioinformatics, especially in the application of techniques from bayesian statistics and machine learning towards genetic sequencing analysis, transcriptomics, and coalescent theory. I try (and fail) to stay up to date on current research in quantum machine learning.
+My current _interests_ are in social theory, where I aspire to analyze opinion polls and financial datasets and interpret the results within social-theoretic and political-economic frameworks. I am also interested in quantitative bioinformatics, especially in the application of techniques from bayesian statistics and machine learning towards genetic sequencing analysis, transcriptomics, and coalescent theory. I try (and fail) to stay up to date on current research in quantum machine learning.
 
 My _hobbies_ include computer-generated music, running, and problem-solving.
 
@@ -30,5 +30,6 @@ This Site
 I've been trying to blog more, I swear. Aside from that, it also serves as a catalog of all the stuff I do --- see the descriptively titled link to "stuff" in the header.
 
 The title of this blog --- _plateaux_ --- is a reference to Deleuze and Guattari's [_Mille plateaux_](https://en.wikipedia.org/wiki/A_Thousand_Plateaus).
+
 This site is based on the <a href="https://github.com/vinitkumar/white-paper">white-paper</a> theme, which I find refreshingly minimal.
-The background color has been modified to `#fff1e0`.
+The background color has been modified to `#e5f5e5` (celadon blended with white).
