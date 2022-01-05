@@ -11,9 +11,13 @@ This post is a bit of a deviation away from my usual posts insofar as it avoids 
 The Elo rating system was first used for chess, where it is still the dominant way of ranking chess players; but it has been used in a number of different sports and competitive player-versus-player video games.
 
 But anyway, why a post about the Elo rating system? Why now? A number of reasons:
+
 * competitive rankings are used in practically any serious game, from tennis to _Counterstrike: Global Offensive_;
+
 * as a perhaps surprising occurrence of the Elo rating, there is a [scene in _The Social Network_](https://www.youtube.com/watch?v=KdtPNRzuKrk) in which zucc and co. use the Elo system to rank the attractiveness of their victims;
+
 * the formulae involved in computing the Elo ratings seem to be intrinsically interesting, with "magic numbers" appearing in them;
+
 * the final reason is that I just needed a good excuse to figure out how this rating system worked. What better time than the present, and what better medium than a blog post?
 
 - - - - -
@@ -21,16 +25,25 @@ But anyway, why a post about the Elo rating system? Why now? A number of reasons
 To characterize the Elo system, we need to describe the problem context.
 
 The Elo rating system (henceforth, "Elo") was designed for chess, as Arpad Elo was a noted fan of the game. As such, it was meant for games that have the same competitive manner of chess:
+
 * one player competes against another player in a game of skill;
+
 * while some degree of randomness may exist, it shouldn't be able to fundamentally change the outcome of a game;
+
 * players are assumed to have a latent "skill" level;
+
 * in tournaments, players are matched together in pairs for each game;
+
 * over the course of their lifetimes, players may compete in pairs against weaker and stronger players;
+
 * and each game results in either victory or defeat for a given player (and consequently, either defeat or victory for the other player, i.e. a win for a player is a loss for their opponent, and _vice versa_).
 
 As a rating system, we have a few desiderata:
+
 * we want to be able to assign a quantitative rating to each player;
+
 * we want to use these ratings to assign interesting matches --- i.e., we want to use ratings to make sure players don't get assigned to lopsided matches of very strong versus very weak players (and ideally, we have evenly-matched players so that each player feels they have some hope of winning);
+
 * and the ratings themselves ought to be publicly available so that we stimulate a degree of competition between players, and so that we are able to construct e.g. "bands" of higher-rank, middle-rank, lower-rank players and segment each band off into their own competitions. It would be nice to use the ratings to promote a sense of "advancement" for dedicated players so that they can "level-up" between bands.
 
 The Elo rating system was one of the earliest rating systems to do the above, and the Elo system and its extensions are still being used, not only in its original context of FIDE chess but also in massive multiplayer online games (e.g. _Halo_, _CS:GO_, and so on).
