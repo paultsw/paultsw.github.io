@@ -117,14 +117,18 @@ In the description of the $$K$$-factor, the $$\alpha$$ term is a chosen value in
 The Elo update rule given a newly observed match outcome $$M \in \{0, 1, 2 \}$$ is, then:
 
 $$
-s_1' := s_1 + y\cdot \Delta(M), \; s_2' := s_2 - y\cdot\Delta(M),
+s_1' := s_1 + y(M) \cdot \Delta(M), \; s_2' := s_2 - y(M) \cdot \Delta(M),
 $$
 
 where $$\Delta$$ is
 
 $$
-\Delta(M) := K\cdot\bigl( \frac{y(M)+1}{2} - \Phi\bigl(\frac{s_1-s_2}{\beta\sqrt{2}}\bigr) \bigr).
+\Delta(M) := K\cdot\biggl( \frac{y(M)+1}{2} - \Phi\bigl(\frac{s_1-s_2}{\beta\sqrt{2}}\bigr) \biggr).
 $$
+
+Where does this update rule come from? Note that the $$y(M)$$ term is simultaneously acting as an indicator function (in the first equation) and as a score in the second: the first ratio is equal to either 0, 0.5, or 1 depending on the outcome of the match.
+
+In other words, the $$\Delta(M)$$ value is simply just a realized match score (given by the ratio involving $$y(M)$$) minus an expected match score (given by the $$\Phi$$), scaled by a learning rate $$K$$.
 
 The update rules for two players are implemented in a short script I've drafted, which takes a dataframe of competitive match outcomes and updates Elo ratings for two players. [You can find it here.](https://github.com/paultsw/blogprogs/tree/master/elo)
 
