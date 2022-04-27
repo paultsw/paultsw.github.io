@@ -6,7 +6,7 @@ title: About
 Paul S. Tang (鄧信和)
 =====================
 
-_"Wovon man nicht sprechen kann, darüber muss man schweigen."_  
+_"Wovon man nicht sprechen kann, darüber muss man schweigen."_
 --- Ludwig Wittgenstein, _Tractatus Logico-Philosophicus_.
 
 Me
@@ -19,9 +19,20 @@ Have something private to tell me? Reach me at `ptsw -at- protonmail -dot- com`.
 ![Standing by the door.](https://ptsw.ca/images/me.jpg "Me")
 {: refdef}
 
-Interests
+What I'm Interested In
 ---------
-My current _interests_ are in social theory, where I aspire to analyze opinion polls and financial datasets and interpret the results within social-theoretic and political-economic frameworks. I am also interested in quantitative bioinformatics, especially in the application of techniques from bayesian statistics and machine learning towards genetic sequencing analysis, transcriptomics, and coalescent theory. I try (and fail) to stay up to date on current research in quantum machine learning.
+One of my past professors, who taught me [category-theoretic semantics](https://en.wikipedia.org/wiki/Denotational_semantics#Connections_to_other_areas_of_computer_science), had the following to say:
+> You suffer from a particular disease, and it's a disease I've suffered from as well. Your problem is that you have far too many disparate interests, and you'll find it hard to specialize and become an academic in the long run.
+
+I'm not certain whether it was a criticism or a compliment (or both), but at this point, I'm pretty confident that he was correct.
+
+- - - - -
+
+My current _interests_ are in social theory, where I aspire to analyze opinion polls and financial datasets and interpret the results within social-theoretic and political-economic frameworks; within this context, I am also broadly interested in [macrohistory](https://en.wikipedia.org/wiki/Macrohistory) and [quantitative history](https://en.wikipedia.org/wiki/Quantitative_history), especially economic history.
+
+Thanks to a past job, I am also interested in quantitative bioinformatics, especially in the application of techniques from bayesian statistics and machine learning towards genetic sequencing analysis, [transcriptomics](https://en.wikipedia.org/wiki/Transcriptome), and [coalescent theory](https://en.wikipedia.org/wiki/Coalescent_theory).
+
+I try (and fail) to stay up to date on current research in quantum machine learning.
 
 My _hobbies_ include computer-generated music, running, and problem-solving.
 
