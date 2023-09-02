@@ -24,3 +24,11 @@ Papers
 * Drexler, HL, Choquet, K, Merens, HE, **Tang, PS**, Simpson, JT, Churchman, LS.  
   Revealing nascent RNA processing dynamics with nano-COP.  
   Nature Protocols (2021) `doi:10.1038/s41596-020-00469-y`  
+
+
+Books I've Read
+===============
+
+I love reading. In particular, I'm a voracious consumer of nonfiction that tells me something about the world; the below list chronicles a subsample of books I've found insightful, informative, or enjoyable. In some cases, I've included a brief review of a few sentences. (Books are _not_ listed in chronological order.)
+
+* _The World For Sale_ (J. Blas, J. Farchy) --- a whirlwind tour of physical commodity traders, deemed the last swashbucklers of global finance. These are the shops like Vitol or Trafigura that not only trade commodities (wheat, crude oil, et cetera) on futures markets, but also on the high seas. Since commodities are often found in places with weaker governance institutions (to say the least), commodity traders often work behind the scenes to "smoothen" deals in ways that some might consider unethical.
