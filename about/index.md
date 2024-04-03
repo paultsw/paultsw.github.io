@@ -28,13 +28,13 @@ I'm not certain whether it was a criticism or a compliment (or both), but at thi
 
 - - - - -
 
-My current _interests_ are in social theory, where I aspire to analyze opinion polls and financial datasets and interpret the results within social-theoretic and political-economic frameworks; within this context, I am also broadly interested in [macrohistory](https://en.wikipedia.org/wiki/Macrohistory) and [quantitative history](https://en.wikipedia.org/wiki/Quantitative_history), especially economic history.
+My current interests are in social theory, where I aspire to analyze opinion polls and financial datasets and interpret the results within social-theoretic and political-economic frameworks; within this context, I am also broadly interested in [macrohistory](https://en.wikipedia.org/wiki/Macrohistory) and [quantitative history](https://en.wikipedia.org/wiki/Quantitative_history), especially economic history.
 
 Thanks to a past job, I am also interested in quantitative bioinformatics, especially in the application of techniques from bayesian statistics and machine learning towards genetic sequencing analysis, [transcriptomics](https://en.wikipedia.org/wiki/Transcriptome), and [coalescent theory](https://en.wikipedia.org/wiki/Coalescent_theory).
 
-I try (and fail) to stay up to date on current research in quantum machine learning.
+I've got some training in quantum statistical mechanics, functional analysis, and quantum computing at the graduate level. As such, I try (and fail) to stay up to date on current research in [quantum machine learning](https://en.wikipedia.org/wiki/Quantum_machine_learning) and applications of physics to machine learning (and vice versa) more broadly.
 
-My _hobbies_ include computer-generated music, running, and problem-solving.
+My hobbies include computer-generated music, running/swimming/cardiovascular exercise, and competitive problem-solving.
 
 This Site
 ---------

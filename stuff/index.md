@@ -12,6 +12,10 @@ Check out my [github page](https://github.com/paultsw).
 
 Writing
 -------
+I have a blog with friendly explanations of algorithms, data structures, and basics of machine learning. You can find it here: [Algoland!](https://algorithm.land). Excuse the sparseness --- it's a permanent work-in-progress.
+
+I also have a substack blog focused on structural analyses of political economy, social organization, history, and technology. I'm currently growing the audience base anonymously, but I will update this page with a link to the website once I de-anonymize.
+
 I'm working on polishing up some long-form notes on various deeper topics in mathematics and computer science. Watch this space!
 
 Papers
@@ -24,11 +28,3 @@ Papers
 * Drexler, HL, Choquet, K, Merens, HE, **Tang, PS**, Simpson, JT, Churchman, LS.  
   Revealing nascent RNA processing dynamics with nano-COP.  
   Nature Protocols (2021) `doi:10.1038/s41596-020-00469-y`  
-
-
-Books I've Read
-===============
-
-I love reading. In particular, I'm a voracious consumer of nonfiction that tells me something about the world; the below list chronicles a subsample of books I've found insightful, informative, or enjoyable. In some cases, I've included a brief review of a few sentences. (Books are _not_ listed in chronological order.)
-
-* _The World For Sale_ (J. Blas, J. Farchy) --- a whirlwind tour of physical commodity traders, deemed the last swashbucklers of global finance. These are the shops like Vitol or Trafigura that not only trade commodities (wheat, crude oil, et cetera) on futures markets, but also on the high seas. Since commodities are often found in places with weaker governance institutions (to say the least), commodity traders often work behind the scenes to "smoothen" deals in ways that some might consider unethical.

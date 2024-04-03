@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "CUDA and Triton for beginners"
-date:   2024-05-13 17:00:00 -0400
+date:   2024-04-02 17:00:00 -0400
 tags: computer-science machine-learning gpu hpc
 share: false
 ---
@@ -107,7 +107,27 @@ def cuda_matmul(A, B, C, m, n, p):
         C[r,c] = tmp
 {% endhighlight %}
 
-Softmax requires `TODO: FINISH SOFTMAX HERE`
+Softmax requires a bit more finesse, since we have to communicate between threads in order to calculate the maxima and sums:
+
+{% highlight python %}
+@cuda.jit
+def softmax_example(result, values):
+	"""Find softmax of values and store in result."""
+	max_example(result, values)
+	max_val = result[0]
+	cuda.atomic.compare_and_swap(result, max_val, 0)
+	cuda.synchronize()
+	sum_example(result, values)
+	sum_val = result[0]
+	cuda.atomic.compare_and_swap(result, max_val, 0)
+	cuda.synchronize()
+	idx = (cuda.blockIdx.x * cuda.blockDim.x) + cuda.threadIdx.x
+	z = values[idx] - max_val
+	numer = np.exp(z)
+	result[idx] = numer / sum_val@cuda.jit
+{% endhighlight %}
+
+...Where the `max_example` and `sum_example` CUDA kernels are not implemented here (left as an exercise), but simply compute the array-wise max and sum, storing the value in the first index of the `result` output array.
 
 - - - - -
 ### Fast compiled code with Triton
@@ -128,12 +148,17 @@ Looking forward, this post will eventually be updated with Triton kernels... Ass
 - - - - -
 ## References
 
-* [^walia](https://www.kaggle.com/code/harshwalia/1-introduction-to-cuda-python-with-numba) Harsh Walia posted this excellent three-part notebook on CUDA development on Kaggle, and I'm grateful to have been able to read their work. Thanks `@harshwalia`!
+[walia](https://www.kaggle.com/code/harshwalia/1-introduction-to-cuda-python-with-numba)
+Harsh Walia posted this excellent three-part notebook on CUDA development on Kaggle, and I'm grateful to have been able to read their work. Thanks `@harshwalia`!
 
-* [^triton](https://triton-lang.org/main/index.html) The documentation for Triton.
+[triton](https://triton-lang.org/main/index.html)
+The documentation for Triton.
 
-* [^numba](https://numba.readthedocs.io/en/stable/cuda/index.html) The CUDA documentation for Numba.
+[numba](https://numba.readthedocs.io/en/stable/cuda/index.html)
+The CUDA documentation for Numba.
 
-* [^cuda](https://nvidia.github.io/cuda-python/overview.html) The documentation for CUDA proper (Python version).
+[cuda](https://nvidia.github.io/cuda-python/overview.html)
+The documentation for CUDA proper (Python version).
 
-* [^deepl](https://www.deeplearningbook.org) Overviews of the softmax function and matrix multiplication can be found in this classic deep learning textbook by Goodfellow, Bengio, and Courville.
+[deepl](https://www.deeplearningbook.org)
+Overviews of the softmax function and matrix multiplication can be found in this classic deep learning textbook by Goodfellow, Bengio, and Courville.
