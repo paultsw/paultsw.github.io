@@ -3,8 +3,8 @@ layout: default
 title: About
 ---
 
-Paul S. Tang (鄧信和)
-=====================
+Paul S. Tang
+============
 
 _"Wovon man nicht sprechen kann, darüber muss man schweigen."_
 --- Ludwig Wittgenstein, _Tractatus Logico-Philosophicus_.
