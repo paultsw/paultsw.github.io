@@ -1,6 +1,6 @@
 EMACS    := emacs --batch
 BUILD_EL := build.el
-OUT_DIR  := _site
+OUT_DIR  := docs
 
 PAGE_ORGS  := about/index.org books/index.org stuff/index.org
 POST_ORGS  := $(sort $(wildcard posts/*.org))

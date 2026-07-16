@@ -61,17 +61,17 @@
   (message "Exported: %s → %s" org-path html-path))
 
 (defun ptsw-export-file (org-path)
-  "Export ORG-PATH to _site/ mirroring directory structure."
+  "Export ORG-PATH to docs/ mirroring directory structure."
   (let* ((rel-path (file-relative-name
                     (concat (file-name-sans-extension org-path) ".html")))
-         (html-path (expand-file-name rel-path (expand-file-name "_site"))))
+         (html-path (expand-file-name rel-path (expand-file-name "docs"))))
     (ptsw-export-to-html org-path html-path)))
 
 (defun ptsw-export-post (org-path)
-  "Export a post from posts/ to _site/blog/posts/."
+  "Export a post from posts/ to docs/blog/posts/."
   (let ((html-path (expand-file-name
                     (concat "blog/posts/" (file-name-base org-path) ".html")
-                    (expand-file-name "_site"))))
+                    (expand-file-name "docs"))))
     (ptsw-export-to-html org-path html-path)))
 
 (defun ptsw-extract-heading (org-file)
@@ -91,7 +91,7 @@
       (string-trim (match-string 1)))))
 
 (defun ptsw-generate-blog-listing ()
-  "Scan posts/*.org for #+TITLE and #+DATE, generate _site/blog/index.html."
+  "Scan posts/*.org for #+TITLE and #+DATE, generate docs/blog/index.html."
   (let* ((posts-dir (expand-file-name "posts"))
          (files (directory-files posts-dir t "\\.org$")))
     (setq files (sort files
@@ -101,7 +101,7 @@
                           (if (and da db)
                               (string> da db)
                             t)))))
-    (ptsw-ensure-dir (expand-file-name "_site/blog"))
+    (ptsw-ensure-dir (expand-file-name "docs/blog"))
     (with-temp-buffer
       (insert "<!DOCTYPE html>\n<html>\n<head>\n")
       (insert "<meta charset=\"utf-8\">\n")
@@ -126,7 +126,7 @@
             (insert (format "<p>%s</p>\n" (or date "")))
             (insert "</section>\n"))))
       (insert "</article>\n</body>\n</html>\n")
-      (write-file (expand-file-name "_site/blog/index.html")))
-    (message "Generated blog listing → _site/blog/index.html")))
+      (write-file (expand-file-name "docs/blog/index.html")))
+    (message "Generated blog listing → docs/blog/index.html")))
 
 (provide 'build)
