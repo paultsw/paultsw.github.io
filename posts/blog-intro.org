@@ -1,0 +1,13 @@
+#+SETUPFILE: ../setup.org
+#+TITLE: This blog: gleanings and sowings
+#+DATE: 2020-03-01
+#+FILETAGS: :general:
+
+This blog is intended as a collection of gleanings and sowings --- [[https://ncatlab.org/nlab/show/R%C3%A9coltes+et+semailles][récoltes et semailles]] --- of morsels of knowledge accumulated through some years of trial and effort in my attempts to understand topics that I found engaging or difficult.
+
+Topics include, but are not limited to: mathematics (pure and applied), statistics, [[https://www.oxfordbibliographies.com/view/document/obo-9780199756384/obo-9780199756384-0054.xml][social theory]], economics (political economy, macroeconomics, financial economics), informatics, physics, machine learning, and biology (computational, evolutionary).
+
+
+Some words of warning for any potential readers: the dates on these posts are effectively meaningless --- they exist to satisfy a Jekyll requirement for a specific date --- but somewhat correlate with the /start/ of writing rather than date of publication. In a possibly postmodern turn, I reserve the right to edit posts in the future without warning.
+
+That said, hopefully the writing is at least tolerable, if not enjoyable.

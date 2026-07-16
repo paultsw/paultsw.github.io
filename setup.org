@@ -1,0 +1,12 @@
+#+OPTIONS: tex:t num:nil toc:nil
+#+HTML_HEAD: <link rel="stylesheet" href="/tufte.css" type="text/css" />
+#+HTML_HEAD: <link rel="stylesheet" href="/ox-tufte.css" type="text/css" />
+#+HTML_HEAD: <meta charset="utf-8">
+#+HTML_HEAD: <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+#+HTML_HEAD: <meta name="description" content="Paul S. Tang">
+#+HTML_HEAD: <meta name="twitter:creator" content="@_ptsw">
+#+HTML_HEAD: <meta name="twitter:card" content="summary">
+#+HTML_HEAD: <link rel="canonical" href="https://ptsw.ca">
+#+HTML_HEAD: <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="plateaux Feed">
+
+#+HTML_HEAD: <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script>

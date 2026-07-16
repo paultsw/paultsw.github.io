@@ -1,0 +1,40 @@
+#+SETUPFILE: ../setup.org
+#+TITLE: About
+
+* Paul S. Tang
+#+BEGIN_QUOTE
+"Wovon man nicht sprechen kann, darüber muss man schweigen."
+--- Ludwig Wittgenstein, /Tractatus Logico-Philosophicus/.
+#+END_QUOTE
+
+** Me
+I'm a machine learning engineer broadly interested in writing programs that use probabilistic modelling and machine learning to look for structure in large troves of data. I strongly believe in developing well-motivated theory to explain patterns, and deploying automated machine learning solutions when theory fails to explain observations and as a supplement to theory.
+
+Have something private to tell me? Reach me at ~~ptsw -at- protonmail -dot- com~~
+
+#+ATTR_HTML: :style text-align: center;
+[[https://ptsw.ca/images/me.jpg]]
+
+** What I'm Interested In
+One of my past professors, who taught me [[https://en.wikipedia.org/wiki/Denotational_semantics#Connections_to_other_areas_of_computer_science][category-theoretic semantics]], had the following to say:
+#+BEGIN_QUOTE
+You suffer from a particular disease, and it's a disease I've suffered from as well. Your problem is that you have far too many disparate interests, and you'll find it hard to specialize and become an academic in the long run.
+#+END_QUOTE
+
+I'm not certain whether it was a criticism or a compliment (or both), but at this point, I'm pretty confident that he was correct.
+
+
+My current interests are in social theory, where I aspire to analyze opinion polls and financial datasets and interpret the results within social-theoretic and political-economic frameworks; within this context, I am also broadly interested in [[https://en.wikipedia.org/wiki/Macrohistory][macrohistory]] and [[https://en.wikipedia.org/wiki/Quantitative_history][quantitative history]], especially economic history.
+
+Thanks to a past job, I am also interested in quantitative bioinformatics, especially in the application of techniques from bayesian statistics and machine learning towards genetic sequencing analysis, [[https://en.wikipedia.org/wiki/Transcriptome][transcriptomics]], and [[https://en.wikipedia.org/wiki/Coalescent_theory][coalescent theory]].
+
+I've got some training in quantum statistical mechanics, functional analysis, and quantum computing at the graduate level. As such, I try (and fail) to stay up to date on current research in [[https://en.wikipedia.org/wiki/Quantum_machine_learning][quantum machine learning]] and applications of physics to machine learning (and vice versa) more broadly.
+
+My hobbies include computer-generated music, running/swimming/cardiovascular exercise, and competitive problem-solving.
+
+** This Site
+I've been trying to blog more, I swear. Aside from that, it also serves as a catalog of all the stuff I do --- see the descriptively titled link to "stuff" in the header.
+
+The title of this blog --- /plateaux/ --- is a reference to Deleuze and Guattari's [[https://en.wikipedia.org/wiki/A_Thousand_Plateaus][Mille plateaux]].
+
+This site is based on the [[https://edwardtufte.github.io/tufte-css][tufte-css]] style sheet and the [[https://github.com/ox-tufte/ox-tufte][ox-tufte]] extension to emacs' org-mode.
