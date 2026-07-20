@@ -33,10 +33,11 @@ copy-assets:
 	cp index.html $(OUT_DIR)/
 	cp 404.html $(OUT_DIR)/
 	cp CNAME $(OUT_DIR)/
-	cp tufte.css $(OUT_DIR)/
+	cp *tufte.css $(OUT_DIR)/
 	cp -r images/* $(OUT_DIR)/images/
 	cp -r js/* $(OUT_DIR)/js/ 2>/dev/null || true
 	cp -r _resources/* $(OUT_DIR)/_resources/ 2>/dev/null || true
+	cp -r et-book $(OUT_DIR)
 	cp LICENSE $(OUT_DIR)/ 2>/dev/null || true
 
 serve:
