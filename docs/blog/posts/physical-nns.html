@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2026-07-17 Fri 00:22 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Physical neural networks?</title>
+<meta name="author" content="Paul T" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/tufte.css" type="text/css" />
+<link rel="stylesheet" href="/ox-tufte.css" type="text/css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Paul S. Tang">
+<meta name="twitter:creator" content="@_ptsw">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://ptsw.ca">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="plateaux Feed">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<header id="preamble" class="status">
+<nav>
+  <div class="site-title"><a href="/">plateaux</a></div>
+  <div class="site-nav">
+    <a href="/about/">About</a>
+    <a href="/stuff/">Stuff</a>
+    <a href="/blog/">Posts</a>
+    <a href="/books/">Reading</a>
+  </div>
+</nav>
+<br/>
+</header>
+<article id="content" class="content">
+<header>
+<h1 class="title">Physical neural networks?</h1>
+</header><p>
+Modern AI models such as OpenAI's GPT, Anthropic's Claude, Meta's LLaMA, and Google's Gemini have set off <a href="https://www.perenews.com/pimco-targets-e750m-for-first-data-center-fund/">a boom in</a> <a href="https://www.bloomberg.com/news/articles/2024-01-29/blackstone-is-building-a-25-billion-ai-data-center-empire">data center construction</a> and a <a href="https://www.reuters.com/technology/nvidias-results-spark-nearly-300-billion-rally-ai-stocks-2023-05-24/">staggering rally in Nvidia thanks to the demand for their (over USD40,000) chips</a>; <a href="https://www.sciencedirect.com/science/article/pii/S0743731518308773">machine learning models suck up a lot of electricity due to their compute-expensive training loops</a>, and <a href="https://www.vox.com/climate/2024/3/28/24111721/ai-uses-a-lot-of-energy-experts-expect-it-to-double-in-just-a-few-years">total ML modeling power consumption is as much as a small country</a>. Small wonder that there is interest in energy-efficient machine learning methods; from the last article (emphasis mine):
+</p>
+
+<blockquote>
+<p>
+One of the areas with the fastest-growing demand for energy is the form of machine learning called generative AI, which requires a lot of energy for training and a lot of energy for producing answers to queries. <i>Training a large language model like OpenAI's GPT-3, for example, uses nearly 1,300 megawatt-hours (MWh) of electricity</i>, the annual consumption of about 130 US homes. According to the IEA, a single Google search takes 0.3 watt-hours of electricity, while a ChatGPT request takes 2.9 watt-hours. (An incandescent light bulb draws an average of 60 watt-hours of juice.) If ChatGPT were integrated into the 9 billion searches done each day, the IEA says, the electricity demand would increase by 10 terawatt-hours a year &#x2014; the amount consumed by about 1.5 million European Union residents.
+</p>
+</blockquote>
+
+<p>
+One potentially very exciting avenue for this is in developing neural networks that use fundamentally different physical representations versus silicon chips. These are chips that use completely different physics versus the silicon integrated circuits that comprise, say, Nvidia H100s.
+</p>
+
+<p>
+This post is a brief dive into two promising approaches for physical representations of neural networks: optical neural networks (which use photonic circuits, making use of the energy-efficient transport of photons versus electrons), and quantum neural networks (which use quantum-mechanical properties to unlock the ability to perform efficient matrix operations).
+</p>
+<section id="outline-container-orgee35afe" class="outline-2">
+<h2 id="orgee35afe">Optical neural networks: training with photons</h2>
+<div class="outline-text-2" id="text-orgee35afe">
+<p>
+Optical neural networks, or ONNs, are neural networks implemented with photonic chips; photonic chips, in turn, are desirable due to the significantly lower energy needed to move photons around as opposed to electrons &#x2014; photonic mobility comes almost for free.
+</p>
+
+<p>
+That said, the "right" way to implement these things is still being researched. Some options include:
+</p>
+<ul class="org-ul">
+<li><i>free space optics</i> &#x2014; a method that lends massive parallelism by allowing photons to move through optical masks in free space, this uses a series of lenses to physically implement operations like fourier transforms (which originally come from physics anyway). One approach to this, which uses phase masks that are 3D-printed (but cannot be trained efficiently) comes from 2018: see <i>All-optical machine learning using diffractive deep neural networks</i> (<a href="https://www.science.org/doi/full/10.1126/science.aat8084">https://www.science.org/doi/full/10.1126/science.aat8084</a>) by Lin, Rivenson, et al.</li>
+<li><i>silicon photonics</i> &#x2014; these use photonic circuits which constrain photons to follow particular pre-fabricated circuit paths, which has the downside of not having the parallelism in the free space approach (though they retain many of the efficiency and speed gains). These may be more easily interfaced with traditional silicon-electronic integrated circuits.</li>
+<li>There are some older approaches that are no longer favored, including an approach based on volume holograms. <a href="https://infoscience.epfl.ch/record/158511?v=pdf">See this link for a review from 1993</a>.</li>
+<li>A later survey article, written in 2022, <a href="https://www.mdpi.com/2076-3417/12/11/5338">is here</a>.</li>
+</ul>
+
+<p>
+As of this writing, <a href="https://www.science.org/doi/10.1126/science.adl1203">one of the most promising real-life optical neural network chips is the taichi system</a> developed by researchers at Tsinghua University in Beijing, which has the ability to store a 13-14 million neuron optical neural network, and which has been able to show extreme energy efficiency compared to Nvidia's (as of this writing) leading H100 chips:
+</p>
+
+<blockquote>
+<p>
+Neural networks that imitate the workings of the human brain now often generate art, power computer vision, and drive many more applications. Now a neural network microchip from China that uses photons instead of electrons, dubbed Taichi, can run AI tasks as well as its electronic counterparts with a thousandth as much energy, according to a new study.
+</p>
+
+<p>
+All in all, the researchers found Taichi displayed an energy efficiency of up to roughly 160 trillion operations per second per watt and an area efficiency of nearly 880 trillion multiply-accumulate operations (the most basic operation in neural networks) per square millimeter. This makes it more than 1,000 times more energy efficient than one of the latest electronic GPUs, the NVIDIA H100, as well as roughly 100 times more energy efficient and 10 times more area efficient than previous other optical neural networks.
+</p>
+</blockquote>
+
+<p>
+That said, though, there are some caveats:
+</p>
+<blockquote>
+<p>
+Although the Taichi chip is compact and energy-efficient, Fang cautions that it relies on many other systems, such as a laser source and high-speed data coupling. These other systems are far more bulky than a single chip, "taking up almost a whole table," she notes. In the future, Fang and her colleagues aim to add more modules onto the chips to make the whole system more compact and energy-efficient.
+</p>
+</blockquote>
+
+<p>
+And how does it perform?
+</p>
+<blockquote>
+<p>
+For instance, previous optical neural networks usually only possessed thousands of parameters &#x2014; the connections between neurons that mimic the synapses linking biological neurons in the human brain. In contrast, Taichi boasts 13.96 million parameters.
+</p>
+
+<p>
+Previous optical neural networks were often limited to classifying data along just a dozen or so categories &#x2014; for instance, figuring out whether images represented one of 10 digits. In contrast, in tests with the Omniglot database of 1,623 different handwritten characters from 50 different alphabets, Taichi displayed an accuracy of 91.89 percent, comparable to its electronic counterparts.
+</p>
+
+<p>
+The scientists also tested Taichi on the advanced AI task of content generation. They found it could produce music clips in the style of Johann Sebastian Bach and generate images of numbers and landscapes in the style of Vincent Van Gogh and Edvard Munch.
+</p>
+</blockquote>
+
+<p>
+Above quotes taken from <a href="https://spectrum.ieee.org/optical-neural-network">this <i>IEEE Spectrum</i> article</a>, which references the original article in <i>Science</i> linked above.
+</p>
+</div>
+</section>
+<section id="outline-container-org0ce0959" class="outline-2">
+<h2 id="org0ce0959">Quantum neural networks: manipulating schroedinger's equation for deep learning</h2>
+<div class="outline-text-2" id="text-org0ce0959">
+<p>
+Quantum neural networks &#x2014; neural networks implemented on quantum computer architectures and taking advantage of quantum gates &#x2014; have been considered since Feynman proposed quantum computing as a concept in the 1980s, though serious study of quantum neural networks have gradually picked up pace since the early 2000s. In this section, we point out three relevant papers.
+</p>
+
+<p>
+The first dates to 2011: <a href="https://onlinelibrary.wiley.com/doi/10.1002/cta.619"><i>Neural networks with quantum architecture and quantum learning</i> by Panella and Martinelli</a> proposes a way to implement QNNs with quantum circuits. Interestingly, they don't use backprop at all; rather, quantum computers can perform parameter search using exhaustive search, which is actually efficiently feasible when we have access to a sufficiently sophisticated quantum computer. This implies that QNNs are quite different from classical neural networks; there is the potential that the expensive backprop and gradient descent-based training routines can be completely obviated altogether when we are allowed to use methods based on quantum superposition.
+</p>
+
+<p>
+<a href="https://arxiv.org/abs/1602.00709"><i>Quantum perceptron over a field and neural network architecture selection in a quantum computer</i> by Da Silva et al (2016)</a> proposes a QNN called "quantum perceptron over a field" (QPF) that directly generalizes a classical perceptron, and additionally proposes a quantum computing algorithm to search over weights and architectures in polynomial time.
+</p>
+
+<p>
+Finally, <a href="https://arxiv.org/abs/1902.10445"><i>Efficient learning for deep quantum neural networks</i> by Beer et al (2019)</a> proposes <i>deep QNNs</i> by defining a quantum perceptron as a unitary operators taking <i>m</i> qubits to <i>n</i> qubits. An <i>L</i>-layer QNN, by analogy with classical feedforward neural networks, is thus a sequence of (generally, non-commutative) unitary operators. Finally, they propose a method to train these deep QNNs by assuming that training data is represented in the form of qubits, with a cost function given by the <i>fidelity</i> between the outputs and the original qubits (which should be replicable):
+</p>
+
+<p>
+\[
+C = \frac{1}{N} \sum_{x=1}^{N} \langle \phi_x^{out} \vert \rho_x^{out} \vert \phi_x^{out} \rangle.
+\]
+</p>
+
+<p>
+Finally, they present a quantum analogue of the backpropagation algorithm, which nonetheless is more efficient due to the mathematics of unitary operators.
+</p>
+</div>
+</section>
+<section id="outline-container-org9639605" class="outline-2">
+<h2 id="org9639605">Final points</h2>
+<div class="outline-text-2" id="text-org9639605">
+<p>
+Alternative physical re-thinkings of neural networks are an exciting area of present research, but even the most promising approaches (such as the Tai Chi paper previously mentioned) don't have the representational capacity to match the needs of modern model architectures such as the GPTs, which can reach over one trillion parameters.
+</p>
+
+<p>
+But given that <a href="https://arxiv.org/abs/2404.04125">we need exponential amounts of data relative to model size</a>, it remains to be seen whether the bottleneck is growing the representational capacity of these physical neural networks or something more fundamental to the "throw data at a big model and see what sticks" approach that we seem insistent on using at the present juncture, such as <a href="https://arxiv.org/abs/2211.04325">the lack of useful data in our world</a> and the underlying sample-inefficient architectures of current foundational models.
+</p>
+</div>
+</section>
+</article>
+<footer id="postamble" class="status">
+
+  <a href="https://twitter.com/_ptsw">Twitter</a>
+  <a href="https://github.com/paultsw">GitHub</a>
+  <a href="https://stackoverflow.com/users/3141064/ptsw">StackOverflow</a>
+</footer>
+</body>
+</html>

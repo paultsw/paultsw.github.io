@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 2026-07-17 Fri 00:22 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CUDA and Triton for beginners</title>
+<meta name="author" content="Paul T" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="/tufte.css" type="text/css" />
+<link rel="stylesheet" href="/ox-tufte.css" type="text/css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Paul S. Tang">
+<meta name="twitter:creator" content="@_ptsw">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://ptsw.ca">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="plateaux Feed">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<header id="preamble" class="status">
+<nav>
+  <div class="site-title"><a href="/">plateaux</a></div>
+  <div class="site-nav">
+    <a href="/about/">About</a>
+    <a href="/stuff/">Stuff</a>
+    <a href="/blog/">Posts</a>
+    <a href="/books/">Reading</a>
+  </div>
+</nav>
+<br/>
+</header>
+<article id="content" class="content">
+<header>
+<h1 class="title">CUDA and Triton for beginners</h1>
+</header><p>
+This is a quick, no-frills introduction to writing GPU code on Kaggle, which offers free notebooks for analysis thanks to a tie-up with Google. Kaggle notebooks are similar to Colab instances, but they also offer cheaper and higher memory GPU-enabled instances (as of this writing).
+</p>
+
+<p>
+In this (hopefully) quick blog post, I'm going to dive through a quick example of how to allocate GPUs on Kaggle, and then show how to develop and benchmark kernels in the same notebook by comparing Numba/CUDA-developed kernel performances to Triton performances.
+</p>
+<section id="outline-container-org0ce0959" class="outline-2">
+<h2 id="org0ce0959">Background</h2>
+<div class="outline-text-2" id="text-org0ce0959">
+<p>
+Machine learning is a major drain on computational resources, but it can be sped up by adopting heterogeneous co-processors, such as a GPU or a TPU. The reason for this is the sheer number of parallel operations involved &#x2014; linear algebra operations such as dot products, matrix multiplications, and other parallelizable (frequently, <a href="https://en.wikipedia.org/wiki/Embarrassingly_parallel">embarassingly parallel</a>) operations.
+</p>
+</div>
+</section>
+<section id="outline-container-org9beed48" class="outline-2">
+<h2 id="org9beed48">Softmax and matrix multiplications</h2>
+<div class="outline-text-2" id="text-org9beed48">
+<p>
+The full Kaggle notebook for this post can be found <a href="https://www.kaggle.com/code/paultsw/writing-cuda-and-triton-kernels">here</a>.
+</p>
+
+<p>
+In the below, we'll implement two kernels: a softmax function and a matrix multiplication method<label id='fnr.1' for='fnr-in.1.572549' class='margin-toggle sidenote-number'><sup class='numeral'>1</sup></label><input type='checkbox' id='fnr-in.1.572549' class='margin-toggle'><span class='sidenote'><sup class='numeral'>1</sup>
+Overviews of the softmax function and matrix multiplication can be found in this classic deep learning textbook by Goodfellow, Bengio, and Courville: <a href="https://www.deeplearningbook.org">https://www.deeplearningbook.org</a>.
+
+
+<ul class="org-ul">
+<li><a href="https://www.kaggle.com/code/harshwalia/1-introduction-to-cuda-python-with-numba">Harsh Walia posted this excellent three-part notebook on CUDA development on Kaggle</a>, and I'm grateful to have been able to read their work. Thanks <code>@harshwalia</code>!</li>
+
+<li><a href="https://triton-lang.org/main/index.html">The documentation for Triton.</a></li>
+
+<li><a href="https://numba.readthedocs.io/en/stable/cuda/index.html">The CUDA documentation for Numba.</a></li>
+
+<li><a href="https://nvidia.github.io/cuda-python/overview.html">The documentation for CUDA proper (Python version).</a></li>
+</ul></span>. These are pretty standard functions that exist in any machine learning library, but we'll choose these two for didactic purposes.
+</p>
+
+<p>
+I assume the reader is familiar with secondary school linear algebra, so I'll skip the definition of matrix multiplication. The softmax function is:
+</p>
+
+<p>
+\[
+\sigma(\vec{x},\tau) = \frac{\exp(\tau \vec{x})}{\sum_{i=1}^{n} \exp(\tau x_i)}
+\]
+</p>
+
+<p>
+Or in Python:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">softmax</span>(arr: np.array, temp: <span style="font-weight: bold;">float</span>) -&gt; np.array:
+  <span style="font-weight: bold; font-style: italic;">expons</span> = np.exp(temp*arr)
+  <span style="font-weight: bold;">return</span> expons / np.<span style="font-weight: bold;">sum</span>(expons)
+</pre>
+</div>
+
+<p>
+One interesting (but irrelevant) note is that the softmax function is \(\nabla \mbox{logsumexp}(x)\), the gradient of the log-sum-exp function. Another interesting (and very relevant) note concerns the <code>temp</code> parameter, which is a scalar parameter that controls how close to uniform the outputs look. (Technically, the implementations above refer to <i>inverse</i> temperature.)
+</p>
+</div>
+<div id="outline-container-org2dc1f56" class="outline-3">
+<h3 id="org2dc1f56">Using GPU instances on Kaggle</h3>
+<div class="outline-text-3" id="text-org2dc1f56">
+<p>
+Kaggle offers GPU instances for free through their notebooks (as of this writing &#x2014; March 2024 &#x2014; it is limited to 30 hours of GPU usage per week). So far, they offer NVidia P100s (the Pascal architecture from a decade ago), and double NVidia T4 GPUs as well. A third option is access to Google TPUs, which play well with Jax/XLA and Tensorflow.
+</p>
+
+<p>
+To use GPU instances on Kaggle, all you need to do is start a Kaggle notebook and select the appropriate co-processor from the right-hand drop-down menu under "accelerator".
+</p>
+</div>
+</div>
+<div id="outline-container-org194cf40" class="outline-3">
+<h3 id="org194cf40">A quick primer on the CUDA GPU development model</h3>
+<div class="outline-text-3" id="text-org194cf40">
+<p>
+GPUs sold by Nvidia with CUDA support are based on a heterogeneous computing model; it distinguishes the primary CPU, or <i>host</i> (which typically you can think of as the one that runs the main code, has a program counter, has access to the kernel via libraries, and so on) with the GPU or <i>device</i>, which runs <i>kernels</i>. Kernels are programs that only exist on the GPU and perform work on data stored within the GPU memory hierarchy.
+</p>
+
+
+<figure id="orgde0f8b8">
+<img src="https://developer.nvidia.com/blog/wp-content/uploads/2020/06/memory-hierarchy-in-gpus-2.png" alt="memory-hierarchy-in-gpus-2.png">
+
+</figure>
+
+<p>
+<i>Threads</i> are the primary work units of a GPU. Each thread represents a series of operations on a given SM.
+</p>
+
+<p>
+Threads are organized into <i>blocks</i> of threads; the entire <i>grid</i> of all threads available on a single device is split up onto blocks. Why this hierarchy? Because blocks can have common-shared memory, which frequently speeds up computation on the whole input array stored in global memory (see below). You can also reshape the geometry of the GPU using thread/block specifications, so that e.g. you can more naturally represent two dimensional matrices or three dimensional tensors using natural units instead of working with clunky strides.
+</p>
+
+<p>
+<i>Streaming multiprocessors</i> are compute nodes within a GPU; they handle one warp (32 threads, as of this writing) at a time, and can operate independently of each other; this can create latency speed-ups while also opening up synchronization issues that need to be resolved with, e.g., atomic compare-and-swap operations. You can synchronize all threads in a block using a call to <code>syncthreads()</code> to run a (time-expensive) barrier operation before continuing with other work down the line.
+</p>
+
+<p>
+GPUs have three levels of data. In order of decreasing size (but increasing latency of access), they are:
+</p>
+<ul class="org-ul">
+<li><i>global device memory</i> is the slowest to access, but the largest, in the tens of gigabytes as of this writing; global memory is accessible by all streaming multiprocessors (SMs). Hosts can only really write to and read from global memory in a costly operation.</li>
+<li><i>shared memory</i> is shared by all threads in a given block. This can be directly allocated using <code>cuda.shared.array()</code>.</li>
+<li><i>local memory</i> is a collection of ultra-fast <i>registers</i> which we use to store local variables.</li>
+</ul>
+
+<p>
+Finally, how do we actually <i>write</i> CUDA kernels?
+</p>
+
+<p>
+CUDA kernels are written from the point of view of a single thread executing the kernel. In other words, we typically follow the following format when writing CUDA kernels:
+</p>
+
+<ol class="org-ol">
+<li>fetch the <i>index</i> of the thread: this is its position either with respect to a single block or with respect to the entire grid.</li>
+<li>perform an operation on the thread, referencing a location in global or shared memory as necessary.</li>
+<li>perform all intercommunications by reading/writing to global/shared memory as necessary.</li>
+<li>block until all threads finish if necessary.</li>
+<li>continue with additional operations.</li>
+</ol>
+
+<p>
+For instance, a CUDA kernel to add two big arrays might look like the following:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold;">def</span> <span style="font-weight: bold;">add_kernel</span>(A, B, C):
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">get index of thread:
+</span>        <span style="font-weight: bold; font-style: italic;">idx</span> = cuda.grid(1)
+        <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">add A and B and store in output array:
+</span>        <span style="font-weight: bold; font-style: italic;">C</span>[idx] = A[idx] + B[idx]
+</pre>
+</div>
+
+<p>
+We always feed all three arrays into the kernel, including the (typically empty) array that contains the output. All inputs should be device arrays, i.e. residing in global memory already.
+</p>
+</div>
+</div>
+<div id="outline-container-orgff52af2" class="outline-3">
+<h3 id="orgff52af2">Writing CUDA kernels with Numba</h3>
+<div class="outline-text-3" id="text-orgff52af2">
+<p>
+Let's write some CUDA kernels with Numba.
+</p>
+
+<p>
+Matrix multiplication is quite basic (though there is an optimized way of doing this): we use a two dimensional grid to store the input and output matrices.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold; text-decoration: underline;">@cuda.jit</span>
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">cuda_matmul</span>(A, B, C, m, n, p):
+    <span style="font-style: italic;">"""Matrix Multiplication kernel: C = A*B.
+    Where C ~ (m,n), A ~ (m,p), B ~ (p,n).
+    """</span>
+    <span style="font-weight: bold; font-style: italic;">r</span>, <span style="font-weight: bold; font-style: italic;">c</span> = cuda.grid(2)
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">check bounds and accumulate matrix multiplication values:
+</span>    <span style="font-weight: bold;">if</span> (r &lt; m) <span style="font-weight: bold;">and</span> (c &lt; n):
+        <span style="font-weight: bold; font-style: italic;">tmp</span> = 0.
+        <span style="font-weight: bold;">for</span> k <span style="font-weight: bold;">in</span> <span style="font-weight: bold;">range</span>(p):
+            <span style="font-weight: bold; font-style: italic;">tmp</span> += A[r,k]*B[k,c]
+        <span style="font-weight: bold; font-style: italic;">C</span>[<span style="font-weight: bold; font-style: italic;">r</span>,<span style="font-weight: bold; font-style: italic;">c</span>] = tmp
+</pre>
+</div>
+
+<p>
+Softmax requires a bit more finesse, since we have to communicate between threads in order to calculate the maxima and sums:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="font-weight: bold; text-decoration: underline;">@cuda.jit</span>
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">softmax_example</span>(result, values):
+        <span style="font-style: italic;">"""Find softmax of values and store in result."""</span>
+        max_example(result, values)
+        <span style="font-weight: bold; font-style: italic;">max_val</span> = result[0]
+        cuda.atomic.compare_and_swap(result, max_val, 0)
+        cuda.synchronize()
+        sum_example(result, values)
+        <span style="font-weight: bold; font-style: italic;">sum_val</span> = result[0]
+        cuda.atomic.compare_and_swap(result, max_val, 0)
+        cuda.synchronize()
+        <span style="font-weight: bold; font-style: italic;">idx</span> = (cuda.blockIdx.x * cuda.blockDim.x) + cuda.threadIdx.x
+        <span style="font-weight: bold; font-style: italic;">z</span> = values[idx] - max_val
+        <span style="font-weight: bold; font-style: italic;">numer</span> = np.exp(z)
+        <span style="font-weight: bold; font-style: italic;">result</span>[idx] = numer / sum_val@cuda.jit
+</pre>
+</div>
+
+<p>
+&#x2026;Where the <code>max_example</code> and <code>sum_example</code> CUDA kernels are not implemented here (left as an exercise), but simply compute the array-wise max and sum, storing the value in the first index of the <code>result</code> output array.
+</p>
+</div>
+</div>
+<div id="outline-container-org79c4fb7" class="outline-3">
+<h3 id="org79c4fb7">Fast compiled code with Triton</h3>
+<div class="outline-text-3" id="text-org79c4fb7">
+<p>
+Unfortunately, Kaggle's GPUs (T4s and P100s) are a bit old and don't support <code>cudatoolkit</code> versions that are compatible with Triton. That said, it's still possible to run Triton in CPU-only mode, so we'll show how to use it in the case of CPU-only compilation with Triton &#x2014; and compare it against the CPU version of Numba.
+</p>
+
+<p>
+In a future update to this blog post, we'll add the GPU benchmarks (watch this space!); but for now, we'll have to be content with the CPU benchmarks.
+</p>
+
+<p>
+<code>WATCH THIS SPACE!</code>
+</p>
+</div>
+</div>
+</section>
+<section id="outline-container-orgf718da5" class="outline-2">
+<h2 id="orgf718da5">Conclusions</h2>
+<div class="outline-text-2" id="text-orgf718da5">
+<p>
+I hope this has been a useful primer on writing CUDA code. Kaggle notebooks are free and the GPU access, even if using less-than-cutting-edge devices, is extremely useful for machine learning engineers who may not have easy access to GPUs for development or learning otherwise.
+</p>
+
+<p>
+Looking forward, this post will eventually be updated with Triton kernels&#x2026; Assuming I can get them to work. Additionally, a speedtest should be implemented soon after that!
+</p>
+</div>
+</section>
+<section id="outline-container-org0b22235" class="outline-2">
+<h2 id="org0b22235">References</h2>
+<div class="outline-text-2" id="text-org0b22235">
+</div>
+</section>
+</article>
+<footer id="postamble" class="status">
+
+  <a href="https://twitter.com/_ptsw">Twitter</a>
+  <a href="https://github.com/paultsw">GitHub</a>
+  <a href="https://stackoverflow.com/users/3141064/ptsw">StackOverflow</a>
+</footer>
+</body>
+</html>
